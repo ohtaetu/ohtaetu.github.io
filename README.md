@@ -23,17 +23,17 @@ Compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learni
 2. **Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment**  
    **T. T. Ngo**\*, N. Bich\*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min (\*equal contribution)  
    *IEEE Access*, vol. 14, pp. 56900–56918, 2026.  
-   [Project page](https://github.com/ohtaetu/resnet-edge-compression) · [DOI: 10.1109/ACCESS.2026.3682854](https://doi.org/10.1109/ACCESS.2026.3682854)
+   [DOI: 10.1109/ACCESS.2026.3682854](https://doi.org/10.1109/ACCESS.2026.3682854) · [Project page](https://github.com/ohtaetu/resnet-edge-compression)
 
 3. **Optimizing binary neural network for resource-constrained edge devices in IoT applications**  
    V. M. Nguyen, **T. T. Ngo**, T. D. Tran, M. T. Nguyen, and M. H. Vo  
    *Journal of Technical Education Science (JTE)*, vol. 21, no. 1, pp. 12–22, Feb. 2026.  
-   [PDF](https://ohtaetu.github.io/papers/nguyen2026_bnn_jte.pdf) · [Project page](https://github.com/ohtaetu/2026-bnn-new) · [DOI: 10.54644/jte.2025.1756](https://doi.org/10.54644/jte.2025.1756)
+   [DOI: 10.54644/jte.2025.1756](https://doi.org/10.54644/jte.2025.1756) · [Project page](https://github.com/ohtaetu/2026-bnn-new) · [PDF](https://ohtaetu.github.io/papers/nguyen2026_bnn_jte.pdf)
 
 4. **Improving time-domain winner-take-all circuit for neuromorphic computing systems**  
    S. N. Truong and **T. T. Ngo**  
    *International Journal of Electrical and Computer Engineering (IJECE)*, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.  
-   [PDF](https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf) · [Project page](https://ohtaetu.github.io/2025-wta/) · [DOI: 10.11591/ijece.v15i6.pp5173-5182](https://doi.org/10.11591/ijece.v15i6.pp5173-5182) · [BibTeX](https://ohtaetu.github.io/2025-wta/citation.bib) · [EndNote](https://ohtaetu.github.io/2025-wta/citation.enw)
+   [DOI: 10.11591/ijece.v15i6.pp5173-5182](https://doi.org/10.11591/ijece.v15i6.pp5173-5182) · [Project page](https://ohtaetu.github.io/2025-wta/) · [PDF](https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf) · [BibTeX](https://ohtaetu.github.io/2025-wta/citation.bib) · [EndNote](https://ohtaetu.github.io/2025-wta/citation.enw)
 
 ## About this repository
 
