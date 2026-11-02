@@ -1,6 +1,6 @@
 # Tu Tien Ngo
 
-M.S. student, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea · Graduate Student Member, IEEE  
+M.S. student, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea · *Graduate Student Member, IEEE*  
 
 Homepage: **[ohtaetu.github.io](https://ohtaetu.github.io/)**
 
