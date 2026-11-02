@@ -30,7 +30,7 @@
     ]
   }
   </script>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='700' fill='white' text-anchor='middle'%3ETN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101828'/%3E%3Cpath d='M8 40h14l5-22 6 34 5-24 4 12h14' fill='none' stroke='%2322d3ee' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <script>
     // apply the saved theme before the page paints
     try {
@@ -38,243 +38,375 @@
       if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
     } catch (e) {}
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f8fa; --card: #ffffff; --text: #18202b; --muted: #4b5563; --faint: #6b7280;
-      --line: #e3e7ed; --accent: #1d4ed8; --accent-soft: #e8eefc; --chip: #f0f2f5; --on-accent: #ffffff;
-      --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06); color-scheme: light;
+      --bg: #f5f6f3; --surface: #ffffff; --surface-2: #eef0ec; --text: #121417; --muted: #4a5058; --faint: #676d75;
+      --line: #dfe2dc; --dot: #c9cdc5; --accent: #0b57d0; --accent-ink: #ffffff; --spike: #c2410c; --glow: rgba(11, 87, 208, .14);
+      --shadow: 0 1px 2px rgba(18, 20, 23, .04), 0 8px 24px -12px rgba(18, 20, 23, .12);
+      color-scheme: light;
     }
     /* dark: follows the system unless the visitor picked light; or forced by the toggle */
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #0d1117; --card: #151b23; --text: #e6edf3; --muted: #a8b1bd; --faint: #8b949e;
-        --line: #262f3a; --accent: #6ea8fe; --accent-soft: #1a2740; --chip: #1d2530; --on-accent: #0d1117;
-        --shadow: none; color-scheme: dark;
+        --bg: #0a0d12; --surface: #11161e; --surface-2: #171e28; --text: #e8edf3; --muted: #a9b3bf; --faint: #8a95a3;
+        --line: #232c38; --dot: #1f2834; --accent: #22d3ee; --accent-ink: #061016; --spike: #fb923c; --glow: rgba(34, 211, 238, .16);
+        --shadow: 0 1px 0 rgba(255, 255, 255, .02), 0 12px 32px -16px rgba(0, 0, 0, .7);
+        color-scheme: dark;
       }
     }
     :root[data-theme="dark"] {
-        --bg: #0d1117; --card: #151b23; --text: #e6edf3; --muted: #a8b1bd; --faint: #8b949e;
-        --line: #262f3a; --accent: #6ea8fe; --accent-soft: #1a2740; --chip: #1d2530; --on-accent: #0d1117;
-        --shadow: none; color-scheme: dark;
+        --bg: #0a0d12; --surface: #11161e; --surface-2: #171e28; --text: #e8edf3; --muted: #a9b3bf; --faint: #8a95a3;
+        --line: #232c38; --dot: #1f2834; --accent: #22d3ee; --accent-ink: #061016; --spike: #fb923c; --glow: rgba(34, 211, 238, .16);
+        --shadow: 0 1px 0 rgba(255, 255, 255, .02), 0 12px 32px -16px rgba(0, 0, 0, .7);
+        color-scheme: dark;
     }
+
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0; color: var(--text); background-color: var(--bg);
+      /* crossbar-like dot grid */
+      background-image: radial-gradient(var(--dot) 1px, transparent 1.4px);
+      background-size: 22px 22px; background-attachment: fixed;
+      font: 16px/1.65 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      transition: background-color .25s ease, color .25s ease;
     }
     a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 56px 20px 72px; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace; }
 
-    /* header */
-    .hero { display: flex; gap: 28px; align-items: center; }
-    .avatar {
-      flex: none; width: 136px; height: 136px; border-radius: 50%; object-fit: cover;
-      background: var(--card); border: 3px solid var(--card);
-      box-shadow: 0 0 0 1px var(--line), 0 4px 14px rgba(16, 24, 40, .10);
+    .page {
+      max-width: 1240px; margin: 0 auto; padding: 56px 32px 72px;
+      display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 56px; align-items: start;
     }
-    h1 { margin: 0; font-size: 2.1rem; line-height: 1.2; letter-spacing: -.01em; }
-    .role { margin: 6px 0 0; color: var(--muted); }
+
+    /* ---------- sidebar ---------- */
+    .side { position: sticky; top: 40px; }
+    .photo-wrap { position: relative; width: 168px; height: 168px; margin-bottom: 26px; }
+    .photo-wrap::before {           /* offset frame */
+      content: ""; position: absolute; inset: 0; border-radius: 28px; transform: translate(10px, 10px);
+      border: 1.5px solid var(--accent); opacity: .55;
+    }
+    .photo {
+      position: relative; display: block; width: 168px; height: 168px; border-radius: 28px; object-fit: cover;
+      background: var(--surface); box-shadow: var(--shadow);
+    }
+    .name-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    h1 {
+      margin: 0; font: 700 2.25rem/1.1 "Space Grotesk", Inter, sans-serif; letter-spacing: -.02em;
+    }
+
+    /* toggle switch */
+    .theme-toggle {
+      position: relative; flex: none; width: 58px; height: 30px; padding: 0; border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--line); background: var(--surface-2); color: var(--text);
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .theme-toggle .knob {
+      position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+      transition: transform .3s cubic-bezier(.4, 1.4, .5, 1);
+    }
+    .theme-toggle svg { width: 14px; height: 14px; fill: var(--spike); }
+    .theme-toggle .moon { display: none; fill: var(--accent); }
+    :root[data-active-theme="dark"] .theme-toggle .knob { transform: translateX(28px); }
+    :root[data-active-theme="dark"] .theme-toggle .sun { display: none; }
+    :root[data-active-theme="dark"] .theme-toggle .moon { display: block; }
+
+    .role { margin: 12px 0 0; color: var(--muted); font-size: .98rem; }
     .role strong { color: var(--text); font-weight: 600; }
-    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0; list-style: none; }
-    .links a {
-      display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px;
-      border: 1px solid var(--line); background: var(--card); color: var(--text); font-size: .875rem;
+    .role em { display: block; margin-top: 2px; }
+
+    /* spike train motif */
+    .spikes { display: block; width: 100%; height: 34px; margin: 18px 0 6px; overflow: visible; }
+    .spikes .trace { fill: none; stroke: var(--line); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+    .spikes .pulse {
+      fill: none; stroke: var(--spike); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round;
+      stroke-dasharray: 46 400; stroke-dashoffset: 446; animation: travel 4.5s linear infinite;
     }
-    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    @keyframes travel { to { stroke-dashoffset: 0; } }
+
+    .links { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+    .links a {
+      display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px;
+      border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: .86rem; font-weight: 500;
+      transition: border-color .2s ease, transform .2s ease, color .2s ease;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; transform: translateY(-1px); }
     .links svg { width: 15px; height: 15px; fill: currentColor; }
 
-    /* sections */
-    section { margin-top: 44px; }
-    h2 {
-      margin: 0 0 14px; font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em;
-      color: var(--text);
+    .side-block { margin-top: 30px; }
+    .label {
+      display: flex; align-items: center; gap: 10px; margin: 0 0 12px;
+      font: 500 .72rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
     }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
-    .card p { margin: 0; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
-    .chips li { padding: 4px 12px; border-radius: 999px; background: var(--chip); font-size: .875rem; color: var(--muted); }
-
-    /* education */
-    .edu { margin: 0; padding: 0; list-style: none; }
-    .edu li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
-    .edu li:first-child { border-top: 0; padding-top: 0; }
+    .label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .chips { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 7px; }
+    .chips li {
+      padding: 4px 11px; border-radius: 999px; font-size: .82rem; color: var(--text);
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .edu { margin: 0; padding: 0 0 0 18px; list-style: none; border-left: 1.5px solid var(--line); }
+    .edu li { position: relative; padding-bottom: 16px; }
     .edu li:last-child { padding-bottom: 0; }
-    .when { color: var(--faint); font-size: .9rem; font-variant-numeric: tabular-nums; }
-    .edu b { display: block; font-weight: 600; }
-    .edu span { color: var(--muted); font-size: .95rem; }
-
-    /* publications */
-    .year { margin: 26px 0 10px; font-size: 1.05rem; font-weight: 700; color: var(--text); }
-    .year:first-of-type { margin-top: 0; }
-    .pubs { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-    .pub { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; box-shadow: var(--shadow); }
-    .pub-title { display: block; font-weight: 650; font-size: 1.02rem; line-height: 1.45; }
-    .pub-authors { display: block; margin-top: 6px; color: var(--muted); font-size: .93rem; }
-    .pub-authors strong { color: var(--text); }
-    .pub-venue { display: block; margin-top: 2px; color: var(--muted); font-size: .93rem; }
-    .pub-venue em { color: var(--text); }
-    .tag {
-      display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 6px; vertical-align: 1px;
-      background: var(--accent-soft); color: var(--accent); font-size: .72rem; font-weight: 600; font-style: normal;
+    .edu li::before {
+      content: ""; position: absolute; left: -24px; top: 6px; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
     }
-    .pub-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .edu .when { display: block; font: 500 .75rem/1.4 "JetBrains Mono", ui-monospace, monospace; color: var(--faint); }
+    .edu b { display: block; font-weight: 600; font-size: .93rem; line-height: 1.4; margin-top: 2px; }
+    .edu span { display: block; color: var(--muted); font-size: .86rem; line-height: 1.45; }
+
+    /* ---------- main column ---------- */
+    .main { min-width: 0; }
+    section + section { margin-top: 56px; }
+    h2 {
+      display: flex; align-items: baseline; gap: 14px; margin: 0 0 20px;
+      font: 700 1.6rem/1.2 "Space Grotesk", Inter, sans-serif; letter-spacing: -.015em;
+    }
+    h2 .idx { font: 500 .8rem/1 "JetBrains Mono", ui-monospace, monospace; color: var(--spike); letter-spacing: .04em; }
+    h2 .count { font: 500 .8rem/1 "JetBrains Mono", ui-monospace, monospace; color: var(--faint); margin-left: auto; }
+
+    .about {
+      position: relative; margin: 0; padding: 26px 30px; border-radius: 18px; background: var(--surface);
+      border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 1.08rem; line-height: 1.75;
+    }
+    .about::before {                 /* signal rail */
+      content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 3px; border-radius: 3px;
+      background: linear-gradient(var(--accent), var(--spike));
+    }
+
+    .year-group { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 18px; }
+    .year-group + .year-group { margin-top: 26px; }
+    .year {
+      position: sticky; top: 40px; align-self: start; margin: 0; padding-top: 16px;
+      font: 700 1.55rem/1 "Space Grotesk", Inter, sans-serif; color: transparent; -webkit-text-stroke: 1.5px var(--muted);
+    }
+    .pubs { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+    .pub {
+      position: relative; padding: 20px 24px 20px 26px; border-radius: 16px; background: var(--surface);
+      border: 1px solid var(--line); box-shadow: var(--shadow);
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .pub::before {
+      content: ""; position: absolute; left: -1px; top: 18px; width: 3px; height: 28px; border-radius: 0 3px 3px 0;
+      background: var(--accent); transition: height .25s ease;
+    }
+    .pub:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); transform: translateY(-2px); box-shadow: var(--shadow), 0 0 0 4px var(--glow); }
+    .pub:hover::before { height: calc(100% - 36px); }
+    .venue-tag {
+      display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;
+      font: 500 .7rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--faint);
+    }
+    .venue-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--spike); }
+    .pub-title { display: block; font: 600 1.06rem/1.45 Inter, sans-serif; color: var(--text); }
+    .pub-authors { display: block; margin-top: 7px; color: var(--muted); font-size: .92rem; }
+    .pub-authors strong { color: var(--text); font-weight: 600; box-shadow: inset 0 -.42em 0 var(--glow); }
+    .pub-venue { display: block; margin-top: 2px; color: var(--muted); font-size: .92rem; }
+    .pub-venue em { color: var(--text); }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
     .pub-links a {
-      padding: 3px 10px; border-radius: 7px; border: 1px solid var(--line); font-size: .8rem;
-      font-weight: 600; color: var(--text); background: var(--bg);
+      padding: 4px 11px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2);
+      font: 500 .76rem/1.5 "JetBrains Mono", ui-monospace, monospace; color: var(--text);
+      transition: border-color .2s ease, color .2s ease, background-color .2s ease;
     }
     .pub-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-    .pub-links a.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-    .pub-links a.primary:hover { color: var(--on-accent); opacity: .9; }
-    .license { display: block; margin-top: 10px; font-size: .78rem; color: var(--faint); }
-    .note { margin-top: 12px; font-size: .85rem; color: var(--faint); }
+    .pub-links a.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .pub-links a.primary:hover { color: var(--accent-ink); filter: brightness(1.08); }
+    .license { display: block; margin-top: 12px; font-size: .78rem; color: var(--faint); }
+    .note { margin: 18px 0 0 92px; font-size: .84rem; color: var(--faint); }
 
-    .theme-toggle {
-      position: fixed; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; padding: 0;
-      display: grid; place-items: center; border-radius: 50%; cursor: pointer;
-      border: 1px solid var(--line); background: var(--card); color: var(--text); box-shadow: var(--shadow);
+    footer {
+      margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .82rem; color: var(--faint);
     }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
-    .theme-toggle .sun { display: none; }
-    :root[data-active-theme="dark"] .theme-toggle .sun { display: block; }
-    :root[data-active-theme="dark"] .theme-toggle .moon { display: none; }
 
-    footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--faint); }
-
-    @media (max-width: 600px) {
-      .wrap { padding: 36px 16px 56px; }
-      .hero { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar { width: 104px; height: 104px; }
-      h1 { font-size: 1.75rem; }
-      .card, .pub { padding: 18px; }
-      .edu li { grid-template-columns: 1fr; gap: 2px; }
+    /* ---------- smaller screens ---------- */
+    @media (max-width: 1080px) {
+      .page { grid-template-columns: 1fr; gap: 40px; max-width: 820px; padding: 44px 24px 64px; }
+      .side { position: static; }
+      .side-top { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+      .photo-wrap { margin-bottom: 0; }
+      .side-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+      .side-block { margin-top: 0; }
+      .spikes { margin: 26px 0 24px; }
+    }
+    @media (max-width: 640px) {
+      .page { padding: 32px 16px 56px; }
+      .side-top { grid-template-columns: 1fr; gap: 22px; }
+      .photo-wrap, .photo { width: 128px; height: 128px; }
+      .photo-wrap::before, .photo { border-radius: 22px; }
+      h1 { font-size: 1.9rem; }
+      .side-blocks { grid-template-columns: 1fr; }
+      .about { padding: 22px 22px 22px 24px; font-size: 1rem; }
+      .year-group { grid-template-columns: 1fr; gap: 10px; }
+      .year { position: static; padding-top: 0; }
+      .pub { padding: 18px 18px 18px 20px; }
+      .note { margin-left: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .spikes .pulse { animation: none; stroke-dashoffset: 120; }
+      .pub, .links a, .theme-toggle .knob, body { transition: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-<button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
-  <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>
-  <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5 1 3h-2l1-3zm0 20-1-3h2l-1 3zM2 12l3-1v2l-3-1zm20 0-3 1v-2l3 1zM4.9 4.9l2.8 1.4-1.4 1.4-1.4-2.8zm14.2 14.2-2.8-1.4 1.4-1.4 1.4 2.8zM4.9 19.1l1.4-2.8 1.4 1.4-2.8 1.4zM19.1 4.9l-1.4 2.8-1.4-1.4 2.8-1.4z"/></svg>
-</button>
-<main class="wrap">
+<div class="page">
 
-  <header class="hero">
-    <img class="avatar" src="images/tu-tien-ngo.jpg" width="136" height="136" alt="Photo of Tu Tien Ngo">
-    <div>
-      <h1>Tu Tien Ngo</h1>
-      <p class="role"><strong>M.S. student</strong>, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea<br>
-        <em>Graduate Student Member, IEEE</em></p>
-      <ul class="links">
-        <li><a href="https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&amp;hl=en"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 8.5l11 6.5 9-5.3V17h2V8.5L12 2zm-6.5 9.9V16c0 1.9 2.9 4 6.5 4s6.5-2.1 6.5-4v-4.1L12 15.8l-6.5-3.9z"/></svg>Google Scholar</a></li>
-        <li><a href="https://orcid.org/0009-0000-0554-585X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zM7.4 17.7H5.9V7.4h1.5v10.3zM6.6 6.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm11.4 6c0 2.9-1.8 5.2-5.2 5.2H9.3V7.4h3.6c3.4 0 5.1 2.4 5.1 5.1zm-1.6 0c0-2-1.2-3.7-3.7-3.7h-1.9v7.5h1.9c2.4 0 3.7-1.6 3.7-3.8z"/></svg>ORCID</a></li>
-        <li><a href="https://www.scopus.com/authid/detail.uri?authorId=60590914100"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm3.9 14.8c-.9.9-2.2 1.4-3.8 1.4-1.9 0-3.4-.6-4.5-1.7l1.2-1.6c.9.8 2 1.3 3.2 1.3 1.2 0 1.9-.5 1.9-1.3 0-.9-.8-1.2-2.3-1.6-2-.5-3.4-1.3-3.4-3.2 0-.9.4-1.7 1.1-2.3.8-.6 1.8-.9 3-.9 1.5 0 2.8.4 3.8 1.3l-1.1 1.6c-.8-.6-1.7-1-2.7-1-1 0-1.7.5-1.7 1.2 0 .8.7 1.1 2.3 1.5 2.1.5 3.4 1.3 3.4 3.2 0 .8-.3 1.5-.9 2.1z"/></svg>Scopus</a></li>
-        <li><a href="https://sciprofiles.com/profile/ohtaetu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-9 2.2-9 5.5V22h18v-2.5c0-3.3-4.6-5.5-9-5.5z"/></svg>SciProfiles</a></li>
-        <li><a href="https://github.com/ohtaetu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a></li>
-        <!-- <li><a href="mailto:you@example.com">Email</a></li> -->
-      </ul>
+  <aside class="side">
+    <div class="side-top">
+      <div class="photo-wrap">
+        <img class="photo" src="images/tu-tien-ngo.jpg" width="168" height="168" alt="Photo of Tu Tien Ngo">
+      </div>
+      <div>
+        <div class="name-row">
+          <h1>Tu Tien Ngo</h1>
+          <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Switch to dark mode">
+            <span class="knob">
+              <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5 1.2 3.2h-2.4L12 2zm0 20-1.2-3.2h2.4L12 22zM2 12l3.2-1.2v2.4L2 12zm20 0-3.2 1.2v-2.4L22 12zM4.9 4.9l3.1 1.4-1.7 1.7-1.4-3.1zm14.2 14.2-3.1-1.4 1.7-1.7 1.4 3.1zM4.9 19.1l1.4-3.1 1.7 1.7-3.1 1.4zM19.1 4.9 17.7 8 16 6.3l3.1-1.4z"/></svg>
+              <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>
+            </span>
+          </button>
+        </div>
+        <p class="role"><strong>M.S. student</strong>, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea
+          <em>Graduate Student Member, IEEE</em></p>
+        <ul class="links">
+          <li><a href="https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&amp;hl=en"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 8.5l11 6.5 9-5.3V17h2V8.5L12 2zm-6.5 9.9V16c0 1.9 2.9 4 6.5 4s6.5-2.1 6.5-4v-4.1L12 15.8l-6.5-3.9z"/></svg>Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0000-0554-585X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zM7.4 17.7H5.9V7.4h1.5v10.3zM6.6 6.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm11.4 6c0 2.9-1.8 5.2-5.2 5.2H9.3V7.4h3.6c3.4 0 5.1 2.4 5.1 5.1zm-1.6 0c0-2-1.2-3.7-3.7-3.7h-1.9v7.5h1.9c2.4 0 3.7-1.6 3.7-3.8z"/></svg>ORCID</a></li>
+          <li><a href="https://www.scopus.com/authid/detail.uri?authorId=60590914100"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm3.9 14.8c-.9.9-2.2 1.4-3.8 1.4-1.9 0-3.4-.6-4.5-1.7l1.2-1.6c.9.8 2 1.3 3.2 1.3 1.2 0 1.9-.5 1.9-1.3 0-.9-.8-1.2-2.3-1.6-2-.5-3.4-1.3-3.4-3.2 0-.9.4-1.7 1.1-2.3.8-.6 1.8-.9 3-.9 1.5 0 2.8.4 3.8 1.3l-1.1 1.6c-.8-.6-1.7-1-2.7-1-1 0-1.7.5-1.7 1.2 0 .8.7 1.1 2.3 1.5 2.1.5 3.4 1.3 3.4 3.2 0 .8-.3 1.5-.9 2.1z"/></svg>Scopus</a></li>
+          <li><a href="https://sciprofiles.com/profile/ohtaetu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-9 2.2-9 5.5V22h18v-2.5c0-3.3-4.6-5.5-9-5.5z"/></svg>SciProfiles</a></li>
+          <li><a href="https://github.com/ohtaetu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a></li>
+          <!-- <li><a href="mailto:you@example.com">Email</a></li> -->
+        </ul>
+      </div>
     </div>
-  </header>
 
-  <section>
-    <h2>About</h2>
-    <div class="card">
-      <p>I am an M.S. student at the School of Electrical Engineering, Kookmin University. I work on hardware for
+    <svg class="spikes" viewBox="0 0 340 34" preserveAspectRatio="none" aria-hidden="true">
+      <path class="trace" d="M0 26 H40 L46 26 L50 4 L55 32 L60 26 H120 L126 26 L130 4 L135 32 L140 26 H168 L174 26 L178 4 L183 32 L188 26 H262 L268 26 L272 4 L277 32 L282 26 H340"/>
+      <path class="pulse" d="M0 26 H40 L46 26 L50 4 L55 32 L60 26 H120 L126 26 L130 4 L135 32 L140 26 H168 L174 26 L178 4 L183 32 L188 26 H262 L268 26 L272 4 L277 32 L282 26 H340"/>
+    </svg>
+
+    <div class="side-blocks">
+      <div class="side-block">
+        <h3 class="label">Research interests</h3>
+        <ul class="chips">
+          <li>Compute-in-memory</li>
+          <li>Neuromorphic circuits</li>
+          <li>Equilibrium propagation</li>
+          <li>Analog learning</li>
+          <li>RRAM crossbar design</li>
+          <li>Energy-efficient AI systems</li>
+        </ul>
+      </div>
+      <div class="side-block">
+        <h3 class="label">Education</h3>
+        <ul class="edu">
+          <li>
+            <span class="when">2025 – present</span>
+            <b>M.S. student, School of Electrical Engineering</b>
+            <span>Kookmin University, Seoul, Republic of Korea</span>
+          </li>
+          <li>
+            <span class="when">2020 – 2024</span>
+            <b>B.S. in Computer Engineering Technology</b>
+            <span>Ho Chi Minh City University of Technology and Engineering (formerly HCMC University of Technology and Education), Vietnam</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section>
+      <h2><span class="idx">01</span>About</h2>
+      <p class="about">I am an M.S. student at the School of Electrical Engineering, Kookmin University. I work on hardware for
         energy-efficient AI: analog and in-memory computing with RRAM crossbars and SRAM, neuromorphic circuits,
         and learning rules such as equilibrium propagation that let neural networks train directly on analog
         hardware. I also work on compact and binary neural networks for edge devices.</p>
-      <ul class="chips" aria-label="Research interests">
-        <li>Compute-in-memory</li>
-        <li>Neuromorphic circuits</li>
-        <li>Equilibrium propagation</li>
-        <li>Analog learning</li>
-        <li>RRAM crossbar design</li>
-        <li>Energy-efficient AI systems</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Education</h2>
-    <div class="card">
-      <ul class="edu">
-        <li>
-          <div class="when">2025 – present</div>
-          <div><b>M.S. student, School of Electrical Engineering</b><span>Kookmin University, Seoul, Republic of Korea</span></div>
-        </li>
-        <li>
-          <div class="when">2020 – 2024</div>
-          <div><b>B.S. in Computer Engineering Technology</b><span>Ho Chi Minh City University of Technology and Engineering (formerly HCMC University of Technology and Education), Vietnam</span></div>
-        </li>
-      </ul>
-    </div>
-  </section>
+    <section>
+      <h2><span class="idx">02</span>Publications<span class="count">4 journal papers</span></h2>
 
-  <section>
-    <h2>Publications</h2>
+      <div class="year-group">
+        <h3 class="year">2026</h3>
+        <ol class="pubs">
+          <li class="pub">
+            <span class="venue-tag">Journal · IEEE TVLSI</span>
+            <span class="pub-title">QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes</span>
+            <span class="pub-authors">S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
+            <span class="pub-venue"><em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>, early access, 2026.</span>
+            <span class="pub-links">
+              <a class="primary" href="https://doi.org/10.1109/TVLSI.2026.3741555">DOI</a>
+              <a href="citations/hong2026_qsatp_tvlsi.bib">BibTeX</a>
+              <a href="citations/hong2026_qsatp_tvlsi.enw">EndNote</a>
+            </span>
+          </li>
+          <li class="pub">
+            <span class="venue-tag">Journal · IEEE Access</span>
+            <span class="pub-title">Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment</span>
+            <span class="pub-authors"><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min</span>
+            <span class="pub-venue"><em>IEEE Access</em>, vol. 14, pp. 56900–56918, 2026.</span>
+            <span class="pub-links">
+              <a class="primary" href="https://doi.org/10.1109/ACCESS.2026.3682854">DOI</a>
+              <a href="https://github.com/ohtaetu/resnet-edge-compression">Project</a>
+              <a href="citations/ngo2026_resnet_access.bib">BibTeX</a>
+              <a href="citations/ngo2026_resnet_access.enw">EndNote</a>
+            </span>
+          </li>
+          <li class="pub">
+            <span class="venue-tag">Journal · JTE</span>
+            <span class="pub-title">Optimizing binary neural network for resource-constrained edge devices in IoT applications</span>
+            <span class="pub-authors">V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
+            <span class="pub-venue"><em>Journal of Technical Education Science</em>, vol. 21, no. 1, pp. 12–22, Feb. 2026.</span>
+            <span class="pub-links">
+              <a class="primary" href="https://doi.org/10.54644/jte.2025.1756">DOI</a>
+              <a href="https://github.com/ohtaetu/2026-bnn-new">Project</a>
+              <a href="papers/nguyen2026_bnn_jte.pdf">PDF</a>
+              <a href="citations/nguyen2026_bnn_jte.bib">BibTeX</a>
+              <a href="citations/nguyen2026_bnn_jte.enw">EndNote</a>
+            </span>
+            <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license. Originally published in JTE by Ho Chi Minh City University of Technology and Engineering.</span>
+          </li>
+        </ol>
+      </div>
 
-    <h3 class="year">2026</h3>
-    <ol class="pubs">
-      <li class="pub">
-        <span class="pub-title">QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes</span>
-        <span class="pub-authors">S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
-        <span class="pub-venue"><em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>, early access, 2026.<span class="tag">Journal</span></span>
-        <span class="pub-links">
-          <a class="primary" href="https://doi.org/10.1109/TVLSI.2026.3741555">DOI</a>
-          <a href="citations/hong2026_qsatp_tvlsi.bib">BibTeX</a>
-          <a href="citations/hong2026_qsatp_tvlsi.enw">EndNote</a>
-        </span>
-      </li>
-      <li class="pub">
-        <span class="pub-title">Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment</span>
-        <span class="pub-authors"><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min</span>
-        <span class="pub-venue"><em>IEEE Access</em>, vol. 14, pp. 56900–56918, 2026.<span class="tag">Journal</span></span>
-        <span class="pub-links">
-          <a class="primary" href="https://doi.org/10.1109/ACCESS.2026.3682854">DOI</a>
-          <a href="https://github.com/ohtaetu/resnet-edge-compression">Project</a>
-          <a href="citations/ngo2026_resnet_access.bib">BibTeX</a>
-          <a href="citations/ngo2026_resnet_access.enw">EndNote</a>
-        </span>
-      </li>
-      <li class="pub">
-        <span class="pub-title">Optimizing binary neural network for resource-constrained edge devices in IoT applications</span>
-        <span class="pub-authors">V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
-        <span class="pub-venue"><em>Journal of Technical Education Science</em>, vol. 21, no. 1, pp. 12–22, Feb. 2026.<span class="tag">Journal</span></span>
-        <span class="pub-links">
-          <a class="primary" href="https://doi.org/10.54644/jte.2025.1756">DOI</a>
-          <a href="https://github.com/ohtaetu/2026-bnn-new">Project</a>
-          <a href="papers/nguyen2026_bnn_jte.pdf">PDF</a>
-          <a href="citations/nguyen2026_bnn_jte.bib">BibTeX</a>
-          <a href="citations/nguyen2026_bnn_jte.enw">EndNote</a>
-        </span>
-        <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license. Originally published in JTE by Ho Chi Minh City University of Technology and Engineering.</span>
-      </li>
-    </ol>
+      <div class="year-group">
+        <h3 class="year">2025</h3>
+        <ol class="pubs">
+          <li class="pub">
+            <span class="venue-tag">Journal · IJECE</span>
+            <span class="pub-title">Improving time-domain winner-take-all circuit for neuromorphic computing systems</span>
+            <span class="pub-authors">S. N. Truong and <strong>T. T. Ngo</strong></span>
+            <span class="pub-venue"><em>International Journal of Electrical and Computer Engineering (IJECE)</em>, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.</span>
+            <span class="pub-links">
+              <a class="primary" href="https://doi.org/10.11591/ijece.v15i6.pp5173-5182">DOI</a>
+              <a href="https://ohtaetu.github.io/2025-wta/">Project</a>
+              <a href="https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf">PDF</a>
+              <a href="https://ohtaetu.github.io/2025-wta/citation.bib">BibTeX</a>
+              <a href="https://ohtaetu.github.io/2025-wta/citation.enw">EndNote</a>
+            </span>
+            <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license. Originally published in IJECE by the Institute of Advanced Engineering and Science (IAES).</span>
+          </li>
+        </ol>
+      </div>
 
-    <h3 class="year">2025</h3>
-    <ol class="pubs">
-      <li class="pub">
-        <span class="pub-title">Improving time-domain winner-take-all circuit for neuromorphic computing systems</span>
-        <span class="pub-authors">S. N. Truong and <strong>T. T. Ngo</strong></span>
-        <span class="pub-venue"><em>International Journal of Electrical and Computer Engineering (IJECE)</em>, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.<span class="tag">Journal</span></span>
-        <span class="pub-links">
-          <a class="primary" href="https://doi.org/10.11591/ijece.v15i6.pp5173-5182">DOI</a>
-          <a href="https://ohtaetu.github.io/2025-wta/">Project</a>
-          <a href="https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf">PDF</a>
-          <a href="https://ohtaetu.github.io/2025-wta/citation.bib">BibTeX</a>
-          <a href="https://ohtaetu.github.io/2025-wta/citation.enw">EndNote</a>
-        </span>
-        <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license. Originally published in IJECE by the Institute of Advanced Engineering and Science (IAES).</span>
-      </li>
-    </ol>
+      <p class="note">* Equal contribution.</p>
+    </section>
 
-    <p class="note">* Equal contribution.</p>
-  </section>
+    <footer>
+      <span>© 2026 Tu Tien Ngo</span>
+      <span class="mono">Last updated · November 2026</span>
+    </footer>
+  </main>
 
-  <footer>© 2026 Tu Tien Ngo · Last updated November 2026</footer>
-</main>
+</div>
 <script>
   (function () {
     var root = document.documentElement;
@@ -282,10 +414,10 @@
     var media = window.matchMedia("(prefers-color-scheme: dark)");
     function active() { return root.getAttribute("data-theme") || (media.matches ? "dark" : "light"); }
     function sync() {
-      var next = active() === "dark" ? "light" : "dark";
-      root.setAttribute("data-active-theme", active());
-      button.setAttribute("aria-label", "Switch to " + next + " mode");
-      button.setAttribute("title", "Switch to " + next + " mode");
+      var dark = active() === "dark";
+      root.setAttribute("data-active-theme", dark ? "dark" : "light");
+      button.setAttribute("aria-checked", dark ? "true" : "false");
+      button.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
     }
     button.addEventListener("click", function () {
       var next = active() === "dark" ? "light" : "dark";
