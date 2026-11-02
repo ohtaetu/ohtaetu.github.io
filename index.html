@@ -3,97 +3,217 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tu Tien Ngo</title>
-  <meta name="description" content="Tu Tien Ngo, graduate student at Kookmin University. Research on neuromorphic computing and analog/mixed-signal circuits.">
+  <title>Tu Tien Ngo · Kookmin University</title>
+  <meta name="description" content="Tu Tien Ngo, M.S. student at the School of Electrical Engineering, Kookmin University. Research on compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learning and RRAM crossbar design.">
+  <meta name="author" content="Tu Tien Ngo">
+  <link rel="canonical" href="https://ohtaetu.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='700' fill='white' text-anchor='middle'%3ETN%3C/text%3E%3C/svg%3E">
   <style>
-    :root { --text: #1f2328; --muted: #59636e; --link: #0b57d0; --line: #d1d9e0; --bg: #ffffff; }
+    :root {
+      --bg: #f7f8fa; --card: #ffffff; --text: #18202b; --muted: #5b6573; --faint: #8a93a1;
+      --line: #e3e7ed; --accent: #1d4ed8; --accent-soft: #e8eefc; --chip: #f0f2f5;
+      --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06);
+    }
     @media (prefers-color-scheme: dark) {
-      :root { --text: #e6edf3; --muted: #9198a1; --link: #6cb6ff; --line: #3d444d; --bg: #0d1117; }
+      :root {
+        --bg: #0d1117; --card: #151b23; --text: #e6edf3; --muted: #9aa4b2; --faint: #6e7781;
+        --line: #262f3a; --accent: #6ea8fe; --accent-soft: #1a2740; --chip: #1d2530;
+        --shadow: none;
+      }
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--text);
-           font: 16px/1.6 Georgia, "Times New Roman", serif; }
-    main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
-    h1 { margin: 0 0 4px; font-size: 2rem; }
-    h2 { margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 1.25rem; }
-    a { color: var(--link); }
-    .affil { margin: 0; color: var(--muted); }
-    .contact { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 20px; }
-    .pubs { margin: 0; padding-left: 1.4em; }
-    .pubs li { margin-bottom: 20px; }
-    .pubs span { display: block; }
-    .pub-title { font-weight: bold; }
-    .pub-venue { color: var(--muted); }
-    .pub-links a { margin-right: 16px; }
-    .license { font-size: 0.875rem; color: var(--muted); }
-    footer { margin-top: 48px; font-size: 0.875rem; color: var(--muted); }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 56px 20px 72px; }
+
+    /* header */
+    .hero { display: flex; gap: 28px; align-items: center; }
+    .avatar {
+      flex: none; width: 104px; height: 104px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--accent); color: #fff;
+      font-size: 38px; font-weight: 700; letter-spacing: .5px;
+    }
+    h1 { margin: 0; font-size: 2.1rem; line-height: 1.2; letter-spacing: -.01em; }
+    .role { margin: 6px 0 0; color: var(--muted); }
+    .role strong { color: var(--text); font-weight: 600; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0; list-style: none; }
+    .links a {
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--card); color: var(--text); font-size: .875rem;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .links svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* sections */
+    section { margin-top: 44px; }
+    h2 {
+      margin: 0 0 14px; font-size: .8rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--faint);
+    }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
+    .card p { margin: 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+    .chips li { padding: 4px 12px; border-radius: 999px; background: var(--chip); font-size: .875rem; color: var(--muted); }
+
+    /* education */
+    .edu { margin: 0; padding: 0; list-style: none; }
+    .edu li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .edu li:first-child { border-top: 0; padding-top: 0; }
+    .edu li:last-child { padding-bottom: 0; }
+    .when { color: var(--faint); font-size: .9rem; font-variant-numeric: tabular-nums; }
+    .edu b { display: block; font-weight: 600; }
+    .edu span { color: var(--muted); font-size: .95rem; }
+
+    /* publications */
+    .year { margin: 26px 0 10px; font-size: 1rem; font-weight: 700; color: var(--muted); }
+    .year:first-of-type { margin-top: 0; }
+    .pubs { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .pub { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; box-shadow: var(--shadow); }
+    .pub-title { display: block; font-weight: 650; font-size: 1.02rem; line-height: 1.45; }
+    .pub-authors { display: block; margin-top: 6px; color: var(--muted); font-size: .93rem; }
+    .pub-authors strong { color: var(--text); }
+    .pub-venue { display: block; margin-top: 2px; color: var(--muted); font-size: .93rem; }
+    .pub-venue em { color: var(--text); }
+    .tag {
+      display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 6px; vertical-align: 1px;
+      background: var(--accent-soft); color: var(--accent); font-size: .72rem; font-weight: 600; font-style: normal;
+    }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .pub-links a {
+      padding: 3px 10px; border-radius: 7px; border: 1px solid var(--line); font-size: .8rem;
+      font-weight: 600; color: var(--text); background: var(--bg);
+    }
+    .pub-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .pub-links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .pub-links a.primary:hover { color: #fff; opacity: .9; }
+    .license { display: block; margin-top: 10px; font-size: .78rem; color: var(--faint); }
+    .note { margin-top: 12px; font-size: .85rem; color: var(--faint); }
+
+    footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--faint); }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 36px 16px 56px; }
+      .hero { flex-direction: column; align-items: flex-start; gap: 18px; }
+      .avatar { width: 80px; height: 80px; font-size: 30px; }
+      h1 { font-size: 1.75rem; }
+      .card, .pub { padding: 18px; }
+      .edu li { grid-template-columns: 1fr; gap: 2px; }
+    }
   </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Tu Tien Ngo</h1>
-    <p class="affil">Graduate student, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea</p>
-    <ul class="contact">
-      <li>ORCID: <a href="https://orcid.org/0009-0000-0554-585X">0009-0000-0554-585X</a></li>
-      <!-- <li><a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a></li> -->
-      <!-- <li>Email: <a href="mailto:you@example.com">you@example.com</a></li> -->
-    </ul>
+<main class="wrap">
+
+  <header class="hero">
+    <div class="avatar" aria-hidden="true">TN</div>
+    <div>
+      <h1>Tu Tien Ngo</h1>
+      <p class="role"><strong>M.S. student</strong>, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea<br>
+        Graduate Student Member, IEEE</p>
+      <ul class="links">
+        <li><a href="https://orcid.org/0009-0000-0554-585X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zM7.4 17.7H5.9V7.4h1.5v10.3zM6.6 6.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm11.4 6c0 2.9-1.8 5.2-5.2 5.2H9.3V7.4h3.6c3.4 0 5.1 2.4 5.1 5.1zm-1.6 0c0-2-1.2-3.7-3.7-3.7h-1.9v7.5h1.9c2.4 0 3.7-1.6 3.7-3.8z"/></svg>ORCID</a></li>
+        <li><a href="https://github.com/ohtaetu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a></li>
+        <!-- <li><a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a></li> -->
+        <!-- <li><a href="mailto:you@example.com">Email</a></li> -->
+      </ul>
+    </div>
   </header>
 
   <section>
-    <h2>Research</h2>
-    <p>My research focuses on hardware for efficient AI: neuromorphic computing circuits, SRAM compute-in-memory, and compact neural networks for edge devices.</p>
+    <h2>About</h2>
+    <div class="card">
+      <p>I am an M.S. student at the School of Electrical Engineering, Kookmin University. I work on hardware for
+        energy-efficient AI: analog and in-memory computing with RRAM crossbars and SRAM, neuromorphic circuits,
+        and learning rules such as equilibrium propagation that let neural networks train directly on analog
+        hardware. I also work on compact and binary neural networks for edge devices.</p>
+      <ul class="chips" aria-label="Research interests">
+        <li>Compute-in-memory</li>
+        <li>Neuromorphic circuits</li>
+        <li>Equilibrium propagation</li>
+        <li>Analog learning</li>
+        <li>RRAM crossbar design</li>
+        <li>Energy-efficient AI systems</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="card">
+      <ul class="edu">
+        <li>
+          <div class="when">Present</div>
+          <div><b>M.S. student, School of Electrical Engineering</b><span>Kookmin University, Seoul, Republic of Korea</span></div>
+        </li>
+        <li>
+          <div class="when">2024</div>
+          <div><b>B.S. in Computer Engineering Technology</b><span>Ho Chi Minh City University of Technology and Engineering (formerly HCMC University of Technology and Education), Vietnam</span></div>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <section>
     <h2>Publications</h2>
+
+    <h3 class="year">2026</h3>
     <ol class="pubs">
-      <li>
+      <li class="pub">
         <span class="pub-title">QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes</span>
-        <span>S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
-        <span class="pub-venue"><em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>, early access, 2026.</span>
+        <span class="pub-authors">S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
+        <span class="pub-venue"><em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>, early access, 2026.<span class="tag">Journal</span></span>
         <span class="pub-links">
-          <a href="https://doi.org/10.1109/TVLSI.2026.3741555">DOI: 10.1109/TVLSI.2026.3741555</a>
+          <a class="primary" href="https://doi.org/10.1109/TVLSI.2026.3741555">DOI</a>
         </span>
       </li>
-      <li>
+      <li class="pub">
         <span class="pub-title">Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment</span>
-        <span><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min (*equal contribution)</span>
-        <span class="pub-venue"><em>IEEE Access</em>, vol. 14, pp. 56900–56918, 2026.</span>
+        <span class="pub-authors"><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min</span>
+        <span class="pub-venue"><em>IEEE Access</em>, vol. 14, pp. 56900–56918, 2026.<span class="tag">Journal</span></span>
         <span class="pub-links">
-          <a href="https://github.com/ohtaetu/resnet-edge-compression">Project page</a>
-          <a href="https://doi.org/10.1109/ACCESS.2026.3682854">DOI: 10.1109/ACCESS.2026.3682854</a>
+          <a class="primary" href="https://doi.org/10.1109/ACCESS.2026.3682854">DOI</a>
+          <a href="https://github.com/ohtaetu/resnet-edge-compression">Project</a>
         </span>
       </li>
-      <li>
+      <li class="pub">
         <span class="pub-title">Optimizing binary neural network for resource-constrained edge devices in IoT applications</span>
-        <span>V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
-        <span class="pub-venue"><em>Journal of Technical Education Science (JTE)</em>, vol. 21, no. 1, pp. 12–22, Feb. 2026.</span>
+        <span class="pub-authors">V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
+        <span class="pub-venue"><em>Journal of Technical Education Science</em>, vol. 21, no. 1, pp. 12–22, Feb. 2026.<span class="tag">Journal</span></span>
         <span class="pub-links">
-          <a href="papers/nguyen2026_bnn_jte.pdf">PDF</a>
+          <a class="primary" href="papers/nguyen2026_bnn_jte.pdf">PDF</a>
           <a href="https://github.com/ohtaetu/2026-bnn-new">Code</a>
-          <a href="https://doi.org/10.54644/jte.2025.1756">DOI: 10.54644/jte.2025.1756</a>
+          <a href="https://doi.org/10.54644/jte.2025.1756">DOI</a>
         </span>
         <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license. Originally published in JTE by Ho Chi Minh City University of Technology and Engineering.</span>
       </li>
-      <li>
+    </ol>
+
+    <h3 class="year">2025</h3>
+    <ol class="pubs">
+      <li class="pub">
         <span class="pub-title">Improving time-domain winner-take-all circuit for neuromorphic computing systems</span>
-        <span>S. N. Truong and <strong>T. T. Ngo</strong></span>
-        <span class="pub-venue"><em>International Journal of Electrical and Computer Engineering (IJECE)</em>, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.</span>
+        <span class="pub-authors">S. N. Truong and <strong>T. T. Ngo</strong></span>
+        <span class="pub-venue"><em>International Journal of Electrical and Computer Engineering (IJECE)</em>, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.<span class="tag">Journal</span></span>
         <span class="pub-links">
-          <a href="https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf">PDF</a>
-          <a href="https://ohtaetu.github.io/2025-wta/">Project page</a>
-          <a href="https://doi.org/10.11591/ijece.v15i6.pp5173-5182">DOI: 10.11591/ijece.v15i6.pp5173-5182</a>
+          <a class="primary" href="https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf">PDF</a>
+          <a href="https://ohtaetu.github.io/2025-wta/">Project</a>
+          <a href="https://doi.org/10.11591/ijece.v15i6.pp5173-5182">DOI</a>
           <a href="https://ohtaetu.github.io/2025-wta/citation.bib">BibTeX</a>
           <a href="https://ohtaetu.github.io/2025-wta/citation.enw">EndNote</a>
         </span>
         <span class="license">Published version, reposted under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license. Originally published in IJECE by the Institute of Advanced Engineering and Science (IAES).</span>
       </li>
     </ol>
+
+    <p class="note">* Equal contribution.</p>
   </section>
 
-  <footer>Last updated: November 2026</footer>
+  <footer>© 2026 Tu Tien Ngo · Last updated November 2026</footer>
 </main>
 </body>
 </html>

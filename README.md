@@ -1,12 +1,17 @@
 # Tu Tien Ngo
 
-Graduate student, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea  
+M.S. student, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea · Graduate Student Member, IEEE  
 
 Homepage: **[ohtaetu.github.io](https://ohtaetu.github.io/)**
 
 ## Research
 
-Hardware for efficient AI: neuromorphic computing circuits, SRAM compute-in-memory, and compact neural networks for edge devices.
+Compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learning, RRAM crossbar design, and energy-efficient AI systems.
+
+## Education
+
+- M.S. student, School of Electrical Engineering, Kookmin University (present)
+- B.S. in Computer Engineering Technology, Ho Chi Minh City University of Technology and Engineering, Vietnam (2024)
 
 ## Publications
 
