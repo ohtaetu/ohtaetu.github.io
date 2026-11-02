@@ -23,7 +23,7 @@ Hardware for efficient AI: neuromorphic computing circuits, SRAM compute-in-memo
 3. **Optimizing binary neural network for resource-constrained edge devices in IoT applications**  
    V. M. Nguyen, **T. T. Ngo**, T. D. Tran, M. T. Nguyen, and M. H. Vo  
    *Journal of Technical Education Science (JTE)*, vol. 21, no. 1, pp. 12–22, Feb. 2026.  
-   [PDF](https://ohtaetu.github.io/papers/nguyen2026_bnn_jte.pdf) · [DOI: 10.54644/jte.2025.1756](https://doi.org/10.54644/jte.2025.1756)
+   [PDF](https://ohtaetu.github.io/papers/nguyen2026_bnn_jte.pdf) · [Code](https://github.com/ohtaetu/2026-bnn-new) · [DOI: 10.54644/jte.2025.1756](https://doi.org/10.54644/jte.2025.1756)
 
 4. **Improving time-domain winner-take-all circuit for neuromorphic computing systems**  
    S. N. Truong and **T. T. Ngo**  
