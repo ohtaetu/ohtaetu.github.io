@@ -7,12 +7,17 @@
   <meta name="description" content="Tu Tien Ngo, M.S. student at the School of Electrical Engineering, Kookmin University. Research on compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learning and RRAM crossbar design.">
   <meta name="author" content="Tu Tien Ngo">
   <link rel="canonical" href="https://ohtaetu.github.io/">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Tu Tien Ngo">
+  <meta property="og:url" content="https://ohtaetu.github.io/">
+  <meta property="og:image" content="https://ohtaetu.github.io/images/tu-tien-ngo.jpg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Tu Tien Ngo",
     "url": "https://ohtaetu.github.io/",
+    "image": "https://ohtaetu.github.io/images/tu-tien-ngo.jpg",
     "jobTitle": "M.S. student",
     "affiliation": {"@type": "CollegeOrUniversity", "name": "Kookmin University"},
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Ho Chi Minh City University of Technology and Engineering"},
@@ -52,9 +57,9 @@
     /* header */
     .hero { display: flex; gap: 28px; align-items: center; }
     .avatar {
-      flex: none; width: 104px; height: 104px; border-radius: 50%;
-      display: grid; place-items: center; background: var(--accent); color: #fff;
-      font-size: 38px; font-weight: 700; letter-spacing: .5px;
+      flex: none; width: 136px; height: 136px; border-radius: 50%; object-fit: cover;
+      background: var(--card); border: 3px solid var(--card);
+      box-shadow: 0 0 0 1px var(--line), 0 4px 14px rgba(16, 24, 40, .10);
     }
     h1 { margin: 0; font-size: 2.1rem; line-height: 1.2; letter-spacing: -.01em; }
     .role { margin: 6px 0 0; color: var(--muted); }
@@ -117,7 +122,7 @@
     @media (max-width: 600px) {
       .wrap { padding: 36px 16px 56px; }
       .hero { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar { width: 80px; height: 80px; font-size: 30px; }
+      .avatar { width: 104px; height: 104px; }
       h1 { font-size: 1.75rem; }
       .card, .pub { padding: 18px; }
       .edu li { grid-template-columns: 1fr; gap: 2px; }
@@ -128,7 +133,7 @@
 <main class="wrap">
 
   <header class="hero">
-    <div class="avatar" aria-hidden="true">TN</div>
+    <img class="avatar" src="images/tu-tien-ngo.jpg" width="136" height="136" alt="Photo of Tu Tien Ngo">
     <div>
       <h1>Tu Tien Ngo</h1>
       <p class="role"><strong>M.S. student</strong>, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea<br>
