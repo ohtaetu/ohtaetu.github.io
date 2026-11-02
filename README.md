@@ -10,8 +10,8 @@ Compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learni
 
 ## Education
 
-- M.S. student, School of Electrical Engineering, Kookmin University (present)
-- B.S. in Computer Engineering Technology, Ho Chi Minh City University of Technology and Engineering, Vietnam (2024)
+- M.S. student, School of Electrical Engineering, Kookmin University (2025–present)
+- B.S. in Computer Engineering Technology, Ho Chi Minh City University of Technology and Engineering, Vietnam (2020–2024)
 
 ## Publications
 
