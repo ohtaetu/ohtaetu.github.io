@@ -279,14 +279,18 @@
     .stocking { transform-box: view-box; animation: swing 3.8s ease-in-out infinite alternate; }
     @keyframes swing { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
     .scene { width: 100%; height: auto; max-height: 170px; margin-top: 48px; overflow: visible; }
-    .sleigh { position: fixed; top: 11vh; left: 0; z-index: 45; width: 320px; opacity: 0; pointer-events: none; }
+    .sleigh { position: fixed; top: 11vh; left: 0; z-index: 45; width: 300px; opacity: 0; pointer-events: none; }
+    .sleigh-art { display: block; width: 100%; height: auto; }
+    :root[data-active-theme="dark"] .sleigh-art {
+      filter: drop-shadow(0 0 .6px rgba(255, 255, 255, .95)) drop-shadow(0 0 .6px rgba(255, 255, 255, .95)) drop-shadow(0 0 6px rgba(255, 214, 140, .35));
+    }
     :root[data-xmas="on"] .sleigh.fly { animation: fly 15s linear forwards; }
     .sleigh .ride { animation: bob 1.1s ease-in-out infinite alternate; }
     @keyframes fly {
-      0% { transform: translate(calc(100vw + 30px), 40px); opacity: 0; }
+      0% { transform: translate(-320px, 40px); opacity: 0; }
       6%, 94% { opacity: 1; }
       50% { transform: translate(50vw, -6px); }
-      100% { transform: translate(-280px, 26px); opacity: 0; }
+      100% { transform: translate(calc(100vw + 30px), 26px); opacity: 0; }
     }
     @keyframes bob { from { transform: translateY(0); } to { transform: translateY(4px); } }
 
@@ -334,7 +338,7 @@
 </head>
 <body>
 <svg class="xmas garland" aria-hidden="true"></svg>
-<svg class="xmas sleigh" viewBox="0 0 300 90" aria-hidden="true"><g class="ride"><path d="M44 50L150 62M104 50l46 12" fill="none" stroke="var(--faint)" stroke-width="1.4"/><image href="images/xmas/deer.svg" x="0" y="14" width="62" height="62"/><image href="images/xmas/deer.svg" x="62" y="14" width="62" height="62"/><image href="images/xmas/sled.svg" x="136" y="22" width="96" height="96"/><image href="images/xmas/santa_claus.svg" x="160" y="4" width="54" height="54"/></g></svg>
+<div class="xmas sleigh"><img class="ride sleigh-art" src="images/xmas/sleigh.svg" alt=""></div>
 <div class="page">
 
   <aside class="side">

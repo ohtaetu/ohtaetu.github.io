@@ -20,6 +20,9 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE
 
-These icons are from Microsoft Fluent Emoji (https://github.com/microsoft/fluentui-emoji),
-used under the MIT License above. santa_hat.svg is made from the hat paths of the
-Santa Claus emoji.
+bell.svg, christmas_tree.svg, snowman.svg and wrapped_gift.svg are from Microsoft Fluent Emoji
+(https://github.com/microsoft/fluentui-emoji), used under the MIT License above. santa_hat.svg is
+made from the hat paths of the Santa Claus emoji.
+
+sleigh.svg is "Santa with flying deers" from Openclipart (https://openclipart.org/detail/173455),
+released into the public domain; it was only cropped.
