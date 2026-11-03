@@ -213,10 +213,9 @@
       flex: none; display: inline-flex; align-items: center; gap: 6px; margin: -3px -6px 0 0; padding: 3px 10px 3px 8px;
       border-radius: 999px; border: 1px solid color-mix(in srgb, var(--spike) 40%, var(--line));
       background: color-mix(in srgb, var(--spike) 7%, var(--surface)); color: var(--text);
-      font: 500 .72rem/1.4 "JetBrains Mono", ui-monospace, monospace; transition: border-color .2s ease;
+      font: 500 .72rem/1.4 "JetBrains Mono", ui-monospace, monospace;
     }
     .cites[hidden] { display: none; }
-    .cites:hover { border-color: var(--spike); text-decoration: none; }
     .cites b { color: var(--spike); font-weight: 700; }
     .cites svg { width: 11px; height: 11px; fill: var(--spike); }
     .cites.bump { animation: bump 1.2s ease-out 2; }
@@ -374,7 +373,7 @@
           <li class="pub" data-doi="10.1109/tvlsi.2026.3741555">
             <span class="pub-head">
               <span class="venue-tag">Journal · IEEE TVLSI</span>
-              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+              <span class="cites" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></span>
             </span>
             <span class="pub-title">QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes</span>
             <span class="pub-authors">S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
@@ -388,7 +387,7 @@
           <li class="pub" data-doi="10.1109/access.2026.3682854">
             <span class="pub-head">
               <span class="venue-tag">Journal · IEEE Access</span>
-              <a class="cites" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=3753050622014903727" title="Citations"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>1</b><span>citation</span></a>
+              <span class="cites"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>1</b><span>citation</span></span>
             </span>
             <span class="pub-title">Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment</span>
             <span class="pub-authors"><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min</span>
@@ -403,7 +402,7 @@
           <li class="pub" data-doi="10.54644/jte.2025.1756">
             <span class="pub-head">
               <span class="venue-tag">Journal · JTE</span>
-              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+              <span class="cites" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></span>
             </span>
             <span class="pub-title">Optimizing binary neural network for resource-constrained edge devices in IoT applications</span>
             <span class="pub-authors">V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
@@ -426,7 +425,7 @@
           <li class="pub" data-doi="10.11591/ijece.v15i6.pp5173-5182">
             <span class="pub-head">
               <span class="venue-tag">Journal · IJECE</span>
-              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+              <span class="cites" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></span>
             </span>
             <span class="pub-title">Improving time-domain winner-take-all circuit for neuromorphic computing systems</span>
             <span class="pub-authors">S. N. Truong and <strong>T. T. Ngo</strong></span>
@@ -482,17 +481,16 @@
     document.querySelectorAll(".pub[data-doi]").forEach(function (li) {
       var badge = li.querySelector(".cites");
       var n = +badge.querySelector("b").textContent;
-      cards[li.getAttribute("data-doi")] = { badge: badge, shown: n, count: n, url: badge.getAttribute("href") };
+      cards[li.getAttribute("data-doi")] = { badge: badge, shown: n, count: n };
     });
     function stat(name, value) {
       var el = document.querySelector('[data-stat="' + name + '"]');
       if (el) el.textContent = value;
     }
-    function merge(doi, count, url) {
+    function merge(doi, count) {
       var c = cards[doi];
       if (!c || !(count >= 0)) return;
       if (count > c.count) c.count = count;
-      if (url && !c.url) { c.url = url; c.badge.href = url; }
     }
     function render() {
       var counts = [];
@@ -514,13 +512,12 @@
     }
     Promise.all([
       json("data/citations.json", { cache: "no-cache" }),
-      json("https://api.openalex.org/works?per-page=50&select=doi,id,cited_by_count&filter=doi:" + Object.keys(cards).join("|"))
+      json("https://api.openalex.org/works?per-page=50&select=doi,cited_by_count&filter=doi:" + Object.keys(cards).join("|"))
     ]).then(function (res) {
       var local = res[0], live = res[1];
-      if (local && local.papers) {           // first, so Scholar "cited by" links win
+      if (local && local.papers) {
         Object.keys(local.papers).forEach(function (doi) {
-          var p = local.papers[doi];
-          merge(doi, p.count, p.scholar_url || (p.openalex_id && "https://openalex.org/works?filter=cites:" + p.openalex_id));
+          merge(doi, local.papers[doi].count);
         });
         var t = document.querySelector('[data-stat="updated"]'), d = new Date(local.updated + "T00:00:00");
         if (t && !isNaN(d)) {
@@ -529,8 +526,7 @@
         }
       }
       ((live && live.results) || []).forEach(function (w) {
-        merge(w.doi.replace("https://doi.org/", "").toLowerCase(), w.cited_by_count,
-              "https://openalex.org/works?filter=cites:" + w.id.split("/").pop());
+        merge(w.doi.replace("https://doi.org/", "").toLowerCase(), w.cited_by_count);
       });
       render();
     });

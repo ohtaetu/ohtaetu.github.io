@@ -45,43 +45,39 @@ def scholar():
     found = {}
     for row in rows:
         title = html.unescape(re.search(r'class="gsc_a_at">(.*?)</a>', row, re.S).group(1))
-        cell = re.search(r'<a href="([^"]*)" class="gsc_a_ac[^"]*">(\d*)</a>', row)
-        count = int(cell.group(2)) if cell and cell.group(2) else 0
-        url = html.unescape(cell.group(1)) if cell and cell.group(1) else None
+        cell = re.search(r'class="gsc_a_ac[^"]*">(\d*)</a>', row)
+        count = int(cell.group(1)) if cell and cell.group(1) else 0
         key = norm(title)
         for doi, ours in PAPERS:
             if key.startswith(norm(ours)) or norm(ours).startswith(key):
-                found[doi] = {"count": count, "url": url}
+                found[doi] = count
     return found
 
 
 def openalex():
     dois = "|".join(d for d, _ in PAPERS)
-    j = json.loads(get(f"https://api.openalex.org/works?filter=doi:{dois}&select=doi,id,cited_by_count&per-page=50"))
-    return {w["doi"].replace("https://doi.org/", "").lower(): {"count": w["cited_by_count"], "id": w["id"].rsplit("/", 1)[-1]}
-            for w in j["results"]}
+    j = json.loads(get(f"https://api.openalex.org/works?filter=doi:{dois}&select=doi,cited_by_count&per-page=50"))
+    return {w["doi"].replace("https://doi.org/", "").lower(): w["cited_by_count"] for w in j["results"]}
 
 
 def semanticscholar():
     body = json.dumps({"ids": [f"DOI:{d}" for d, _ in PAPERS]}).encode()
     j = json.loads(get("https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount", body,
                        {"Content-Type": "application/json"}))
-    return {d: {"count": p["citationCount"]} for (d, _), p in zip(PAPERS, j) if p}
+    return {d: p["citationCount"] for (d, _), p in zip(PAPERS, j) if p}
 
 
 def crossref():
     out = {}
     for d, _ in PAPERS:
         j = json.loads(get(f"https://api.crossref.org/works/{d}"))
-        out[d] = {"count": j["message"].get("is-referenced-by-count", 0)}
+        out[d] = j["message"].get("is-referenced-by-count", 0)
     return out
 
 
 def main():
     old = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {"papers": {}}
-    papers = {d: dict(old["papers"].get(d, {})) for d, _ in PAPERS}
-    for p in papers.values():
-        p.setdefault("sources", {})
+    papers = {d: {"sources": dict(old["papers"].get(d, {}).get("sources", {}))} for d, _ in PAPERS}
 
     for name, fetch in [("scholar", scholar), ("openalex", openalex), ("semanticscholar", semanticscholar),
                         ("crossref", crossref)]:
@@ -90,15 +86,10 @@ def main():
         except Exception as e:  # keep the previous value for this source
             print(f"{name}: skipped ({e})")
             continue
-        for d, r in result.items():
-            if d not in papers:
-                continue
-            papers[d]["sources"][name] = r["count"]
-            if name == "scholar" and r.get("url"):
-                papers[d]["scholar_url"] = r["url"]
-            if name == "openalex":
-                papers[d]["openalex_id"] = r["id"]
-        print(f"{name}: " + ", ".join(f"{d}={r['count']}" for d, r in result.items()))
+        for d, count in result.items():
+            if d in papers:
+                papers[d]["sources"][name] = count
+        print(f"{name}: " + ", ".join(f"{d}={c}" for d, c in result.items()))
 
     for p in papers.values():
         p["count"] = max(p["sources"].values(), default=0)
