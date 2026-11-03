@@ -48,6 +48,7 @@
       --line: #dfe2dc; --dot: #c9cdc5; --accent: #0b57d0; --accent-ink: #ffffff; --spike: #c2410c; --glow: rgba(11, 87, 208, .14);
       --shadow: 0 1px 2px rgba(18, 20, 23, .04), 0 8px 24px -12px rgba(18, 20, 23, .12);
       --snow: 136, 160, 196;
+      --tree: #1d6b4f; --tree-2: #155a41; --ground: #ffffff; --deer: #94643a;
       color-scheme: light;
     }
     /* dark: follows the system unless the visitor picked light; or forced by the toggle */
@@ -57,6 +58,7 @@
         --line: #232c38; --dot: #1f2834; --accent: #22d3ee; --accent-ink: #061016; --spike: #fb923c; --glow: rgba(34, 211, 238, .16);
         --shadow: 0 1px 0 rgba(255, 255, 255, .02), 0 12px 32px -16px rgba(0, 0, 0, .7);
         --snow: 228, 240, 255;
+        --tree: #2b8a62; --tree-2: #1f6e4d; --ground: #d3dde9; --deer: #a8764a;
         color-scheme: dark;
       }
     }
@@ -65,6 +67,7 @@
         --line: #232c38; --dot: #1f2834; --accent: #22d3ee; --accent-ink: #061016; --spike: #fb923c; --glow: rgba(34, 211, 238, .16);
         --shadow: 0 1px 0 rgba(255, 255, 255, .02), 0 12px 32px -16px rgba(0, 0, 0, .7);
         --snow: 228, 240, 255;
+        --tree: #2b8a62; --tree-2: #1f6e4d; --ground: #d3dde9; --deer: #a8764a;
         color-scheme: dark;
     }
 
@@ -261,6 +264,36 @@
     .license { display: block; margin-top: 12px; font-size: .78rem; color: var(--faint); }
     .note { margin: 18px 0 0 92px; font-size: .84rem; color: var(--faint); }
 
+    /* ---------- christmas decorations (only while data-xmas="on") ---------- */
+    .xmas { display: none; }
+    :root[data-xmas="on"] .xmas { display: block; }
+    .santa-hat {
+      position: absolute; z-index: 2; width: 112px; top: -42px; left: -32px; transform: rotate(-18deg);
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .18)); pointer-events: none;
+    }
+    .garland { position: absolute; top: 0; left: 0; z-index: 40; pointer-events: none; overflow: visible; }
+    .garland .wire { fill: none; stroke: var(--faint); stroke-width: 1.4; opacity: .75; }
+    .bulb { animation: twinkle 2.6s ease-in-out infinite alternate; }
+    :root[data-active-theme="dark"] .bulb ellipse { filter: url(#glow); }
+    @keyframes twinkle { from { opacity: 1; } to { opacity: .35; } }
+    .stocking { transform-box: view-box; animation: swing 3.8s ease-in-out infinite alternate; }
+    @keyframes swing { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+    .scene { width: 100%; height: auto; max-height: 150px; margin-top: 48px; overflow: visible; }
+    .scene .star { transform-box: fill-box; transform-origin: center; animation: pulse 2.2s ease-in-out infinite alternate; }
+    .scene .nose { animation: glow 1.6s ease-in-out infinite alternate; }
+    @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.25); } }
+    @keyframes glow { from { opacity: 1; } to { opacity: .45; } }
+    .sleigh { position: fixed; top: 11vh; left: 0; z-index: 45; width: 210px; opacity: 0; pointer-events: none; }
+    :root[data-xmas="on"] .sleigh.fly { animation: fly 15s linear forwards; }
+    .sleigh .ride { animation: bob 1.1s ease-in-out infinite alternate; }
+    @keyframes fly {
+      0% { transform: translate(-240px, 40px); opacity: 0; }
+      6%, 94% { opacity: .85; }
+      50% { transform: translate(50vw, -6px); }
+      100% { transform: translate(calc(100vw + 30px), 26px); opacity: 0; }
+    }
+    @keyframes bob { from { transform: translateY(0); } to { transform: translateY(4px); } }
+
     footer {
       margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line);
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .82rem; color: var(--faint);
@@ -290,23 +323,29 @@
       .year { position: static; padding-top: 0; }
       .pub { padding: 18px 18px 18px 20px; }
       .note { margin-left: 0; }
+      :root[data-xmas="on"] .page { padding-top: 52px; }
+      .santa-hat { width: 86px; top: -32px; left: -24px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .spikes .pulse { animation: none; stroke-dashoffset: 120; }
       .pub, .links a, .theme-toggle .knob, body { transition: none; }
       .snow-toggle[aria-pressed="true"] svg { animation: none; }
+      .bulb, .stocking, .scene .star, .scene .nose, .sleigh .ride { animation: none; }
       .cites.bump { animation: none; }
       html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
+<svg class="xmas garland" aria-hidden="true"></svg>
+<svg class="xmas sleigh" viewBox="0 0 240 64" aria-hidden="true"><g class="ride" fill="currentColor" style="color:var(--faint)"><path d="M6 54h86c8 0 10-8 5-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 50l4-20h50c8 0 12 6 14 20z"/><circle cx="26" cy="25" r="9"/><ellipse cx="47" cy="27" rx="10" ry="9"/><circle cx="48" cy="14" r="6"/><path d="M42 11l12-1 6-8z" fill="#d62839"/><path d="M82 40L152 33M82 40l112-7" fill="none" stroke="currentColor" stroke-width="1.2"/><ellipse cx="160" cy="34" rx="15" ry="6"/><path d="M170 33l7-10 4 2-6 10z"/><ellipse cx="181" cy="21" rx="5.5" ry="3.6"/><g fill="none" stroke-width="2.4" stroke-linecap="round" stroke="currentColor"><path d="M169 37l7 8M165 38l3 9M151 37l-8 6M147 36l-9 3M179 18l-3-8m0 0l-4-2m4 2l1-5M183 18l2-8m0 0l4-2"/></g><ellipse cx="205" cy="34" rx="15" ry="6"/><path d="M215 33l7-10 4 2-6 10z"/><ellipse cx="226" cy="21" rx="5.5" ry="3.6"/><g fill="none" stroke-width="2.4" stroke-linecap="round" stroke="currentColor"><path d="M214 37l7 8M210 38l3 9M196 37l-8 6M192 36l-9 3M224 18l-3-8m0 0l-4-2m4 2l1-5M228 18l2-8m0 0l4-2"/></g><circle class="nose" cx="231.5" cy="21.5" r="2.4" fill="#e63946" stroke="none"/></g></svg>
 <div class="page">
 
   <aside class="side">
     <div class="side-top">
       <div class="photo-wrap">
         <img class="photo" src="images/tu-tien-ngo.jpg" width="168" height="168" alt="Photo of Tu Tien Ngo">
+        <svg class="xmas santa-hat" viewBox="0 0 112 84" aria-hidden="true"><path d="M16 60C22 32 42 12 68 9c16-2 28 7 32 23-7-5-16-5-22 1-6 7-5 18-1 27z" fill="#d62839"/><path d="M68 9c16-2 28 7 32 23-7-5-16-5-22 1-2-8-6-17-10-24z" fill="#9d0f1c" opacity=".45"/><circle cx="100" cy="35" r="8.5" fill="#fbfbfb"/><rect x="8" y="54" width="80" height="18" rx="9" fill="#fbfbfb"/><path d="M16 67h64" stroke="#e3e6ea" stroke-width="3" stroke-linecap="round"/></svg>
       </div>
       <div>
         <div class="name-row">
@@ -318,7 +357,7 @@
               <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>
             </span>
           </button>
-          <button class="snow-toggle" type="button" aria-pressed="false" aria-label="Snow" title="Turn on snow" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3.2 10.4l3.4-.9-.9-3.4M20.8 13.6l-3.4.9.9 3.4M5.7 18l.9-3.4-3.4-.9M18.3 6l-.9 3.4 3.4.9"/></svg></button>
+          <button class="snow-toggle" type="button" aria-pressed="false" aria-label="Winter effects" title="Turn on winter effects" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3.2 10.4l3.4-.9-.9-3.4M20.8 13.6l-3.4.9.9 3.4M5.7 18l.9-3.4-3.4-.9M18.3 6l-.9 3.4 3.4.9"/></svg></button>
           </span>
         </div>
         <p class="role"><strong>M.S. student</strong>, School of Electrical Engineering, Kookmin University, Seoul, Republic of Korea
@@ -468,6 +507,8 @@
       <p class="note">* Equal contribution.</p>
     </section>
 
+    <svg class="xmas scene" viewBox="0 0 800 130" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><defs><filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect x="509.1" y="100.7" width="5.8" height="9.3" fill="#6b4a2e"/><path d="M512 52L523.6 73.9Q512 76.8 500.4 73.9Z" fill="var(--tree)"/><path d="M512 52L516.2 59.9Q512 62.1 507.8 59.9Z" fill="#fbfbfb" opacity=".92"/><path d="M512 65.5L529.4 87.9Q512 90.8 494.6 87.9Z" fill="var(--tree-2)"/><path d="M512 65.5L518.3 73.5Q512 75.8 505.7 73.5Z" fill="#fbfbfb" opacity=".92"/><path d="M512 78.9L535.2 101.9Q512 104.8 488.8 101.9Z" fill="var(--tree)"/><path d="M512 78.9L520.4 87.2Q512 89.5 503.6 87.2Z" fill="#fbfbfb" opacity=".92"/><rect x="741.8" y="97.8" width="6.4" height="10.2" fill="#6b4a2e"/><path d="M745 44L757.8 68.2Q745 71.4 732.2 68.2Z" fill="var(--tree)"/><path d="M745 44L749.6 52.7Q745 55.1 740.4 52.7Z" fill="#fbfbfb" opacity=".92"/><path d="M745 58.9L764.2 83.6Q745 86.8 725.8 83.6Z" fill="var(--tree-2)"/><path d="M745 58.9L751.9 67.8Q745 70.3 738.1 67.8Z" fill="#fbfbfb" opacity=".92"/><path d="M745 73.7L770.6 99Q745 102.2 719.4 99Z" fill="var(--tree)"/><path d="M745 73.7L754.2 82.8Q745 85.4 735.8 82.8Z" fill="#fbfbfb" opacity=".92"/><rect x="554.8" y="95.4" width="10.4" height="16.6" fill="#6b4a2e"/><path d="M560 8L580.8 47.4Q560 52.6 539.2 47.4Z" fill="var(--tree)"/><path d="M560 8L567.5 22.2Q560 26.1 552.5 22.2Z" fill="#fbfbfb" opacity=".92"/><path d="M560 32.1L591.2 72.4Q560 77.6 528.8 72.4Z" fill="var(--tree-2)"/><path d="M560 32.1L571.2 46.6Q560 50.7 548.8 46.6Z" fill="#fbfbfb" opacity=".92"/><path d="M560 56.3L601.6 97.4Q560 102.6 518.4 97.4Z" fill="var(--tree)"/><path d="M560 56.3L575 71.1Q560 75.2 545 71.1Z" fill="#fbfbfb" opacity=".92"/><g class="bulb" style="color:#e63946;animation-delay:-0s"><ellipse cx="545.4" cy="38.7" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#ffb703;animation-delay:-0.4s"><ellipse cx="560" cy="38.7" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#3a86ff;animation-delay:-0.7s"><ellipse cx="574.6" cy="38.7" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#f1f1f1;animation-delay:-1.1s"><ellipse cx="538.2" cy="63.5" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#e63946;animation-delay:-1.5s"><ellipse cx="560" cy="63.5" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#ffb703;animation-delay:-1.9s"><ellipse cx="581.8" cy="63.5" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#3a86ff;animation-delay:-2.2s"><ellipse cx="530.9" cy="88.4" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#f1f1f1;animation-delay:-2.6s"><ellipse cx="560" cy="88.4" rx="2.4" ry="2.4" fill="currentColor"/></g><g class="bulb" style="color:#e63946;animation-delay:-3s"><ellipse cx="589.1" cy="88.4" rx="2.4" ry="2.4" fill="currentColor"/></g><polygon class="star" points="560,-3 562,2.2 567.6,2.5 563.2,6.1 564.7,11.5 560,8.4 555.3,11.5 556.8,6.1 552.4,2.5 558,2.2" fill="#ffc94d"/><rect x="664.2" y="97.8" width="7.6" height="12.2" fill="#6b4a2e"/><path d="M668 34L683.2 62.8Q668 66.6 652.8 62.8Z" fill="var(--tree)"/><path d="M668 34L673.5 44.4Q668 47.2 662.5 44.4Z" fill="#fbfbfb" opacity=".92"/><path d="M668 51.6L690.8 81.1Q668 84.9 645.2 81.1Z" fill="var(--tree-2)"/><path d="M668 51.6L676.2 62.2Q668 65.2 659.8 62.2Z" fill="#fbfbfb" opacity=".92"/><path d="M668 69.3L698.4 99.4Q668 103.2 637.6 99.4Z" fill="var(--tree)"/><path d="M668 69.3L678.9 80.1Q668 83.1 657.1 80.1Z" fill="#fbfbfb" opacity=".92"/><g aria-hidden="true"><path d="M346 84q-8-2-9 4" stroke="var(--deer)" stroke-width="3" fill="none" stroke-linecap="round"/><g stroke="var(--deer)" stroke-width="4.5" stroke-linecap="round"><path d="M352 88v19M361 90v18M382 90v18M390 88v19"/></g><ellipse cx="371" cy="84" rx="27" ry="11.5" fill="var(--deer)"/><path d="M386 80l8-23 9 2-6 24z" fill="var(--deer)"/><ellipse cx="404" cy="55" rx="10.5" ry="7" transform="rotate(18 404 55)" fill="var(--deer)"/><path d="M396 50l-6-4 3 7z" fill="var(--deer)"/><g stroke="#5b3a1f" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M399 48l-5-16m0 0l-6-5m6 5l1-9"/><path d="M405 47l3-16m0 0l-3-8m3 8l6-4"/></g><circle cx="406" cy="53" r="1.4" fill="#1b1b1b"/><circle class="nose" cx="414.5" cy="59" r="3.6" fill="#e63946"/><path d="M362 80q9 5 20 0" stroke="#fbfbfb" stroke-width="2" opacity=".35" fill="none"/></g><path d="M0 110Q140 96 300 106T560 106T800 104V130H0z" fill="var(--ground)" stroke="var(--line)"/><rect x="590" y="91" width="20" height="16" rx="2" fill="#d62839"/><path d="M600 91v16M590 98h20" stroke="#ffc94d" stroke-width="2.5"/><path d="M600 91c-4-5-9-3-6 0M600 91c4-5 9-3 6 0" stroke="#ffc94d" stroke-width="2" fill="none"/><rect x="613" y="96" width="15" height="11" rx="2" fill="#3a86ff"/><path d="M620.5 96v11" stroke="#fbfbfb" stroke-width="2"/></svg>
+
     <footer>
       <span>© 2026 Tu Tien Ngo</span>
       <span class="mono">Last updated · November 2026</span>
@@ -554,12 +595,15 @@
       render();
     });
   })();
-  // winter snow (Nov-Feb only); visitors can switch it off and the choice is remembered
+  // winter effects: snow Nov-Feb, Christmas decorations Nov-Dec; one button switches them off and is remembered
   (function () {
     if ([10, 11, 0, 1].indexOf(new Date().getMonth()) < 0) return;
     var root = document.documentElement, button = document.querySelector(".snow-toggle");
     var canvas = document.createElement("canvas"), ctx = canvas.getContext("2d");
     var flakes = [], w = 0, h = 0, color = "", wind = 0, targetWind = 0, raf = 0, on = false;
+    var xmas = new Date().getMonth() >= 10;            // Christmas decorations in Nov and Dec
+    var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var garlandSvg = document.querySelector(".garland"), sleigh = document.querySelector(".sleigh");
     canvas.className = "snow";
     canvas.setAttribute("aria-hidden", "true");
     button.hidden = false;
@@ -605,27 +649,69 @@
       }
       raf = requestAnimationFrame(frame);
     }
+    // string of lights along the top edge, with two stockings when the side gutters are wide enough
+    function garland() {
+      var W = document.documentElement.clientWidth, sp = W < 640 ? 68 : 96, sag = 16, y0 = 3, yc = y0 + 2 * sag;
+      var cols = ["#e63946", "#ffb703", "#2a9d8f", "#3a86ff"], d = "M0 " + y0, bulbs = "", socks = "", k = 0;
+      function wireY(t) { return (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * yc + t * t * y0; }
+      for (var x0 = 0; x0 < W; x0 += sp) {
+        d += "Q" + (x0 + sp / 2) + " " + yc + " " + (x0 + sp) + " " + y0;
+        [.22, .5, .78].forEach(function (t) {
+          var bx = x0 + sp * t, by = wireY(t);
+          bulbs += '<g class="bulb" style="color:' + cols[k % 4] + ';animation-delay:-' + ((k * .53) % 2.6).toFixed(2) + 's">' +
+            '<rect x="' + (bx - 2) + '" y="' + by + '" width="4" height="4" rx="1" fill="#7b8088"/>' +
+            '<ellipse cx="' + bx + '" cy="' + (by + 9) + '" rx="3.6" ry="5.4" fill="currentColor"/></g>';
+          k++;
+        });
+      }
+      var page = document.querySelector(".page").getBoundingClientRect(), gutter = page.left + 32;
+      if (gutter >= 110) {
+        [gutter / 2, W - gutter / 2].forEach(function (sx, i) {
+          var t = (sx % sp) / sp, wy = wireY(t), flip = i === 0 ? " translate(26 0) scale(-1 1)" : "";
+          socks += '<g class="stocking" style="transform-origin:' + sx + 'px ' + wy + 'px;animation-delay:-' + (i * 1.7) + 's">' +
+            '<path d="M' + sx + ' ' + wy + 'v9" stroke="var(--faint)" stroke-width="1.2"/>' +
+            '<g transform="translate(' + (sx - 13) + ' ' + (wy + 9) + ')' + flip + '">' +
+            '<path d="M3 9h20v24c4 1 8 3 10 6 3 5-1 10-7 9-4 0-8-2-11-5C9 39 3 36 3 30z" fill="#d62839"/>' +
+            '<path d="M3 17h20M3 24h20" stroke="#ffd2d7" stroke-width="2"/>' +
+            '<path d="M27 39c3 1 5 4 4 7-1 2-4 2-6 2l-3-5z" fill="#fbfbfb" opacity=".9"/>' +
+            '<rect x="1" y="0" width="24" height="10" rx="4" fill="#fbfbfb"/></g></g>';
+        });
+      }
+      garlandSvg.setAttribute("width", W);
+      garlandSvg.setAttribute("height", 110);
+      garlandSvg.setAttribute("viewBox", "0 0 " + W + " 110");
+      garlandSvg.innerHTML = '<path class="wire" d="' + d + '"/>' + bulbs + socks;
+    }
+    function flyOnce() {
+      if (!on || !xmas || still || document.hidden) return;
+      sleigh.classList.remove("fly");
+      void sleigh.getBoundingClientRect();         // restart the animation
+      sleigh.classList.add("fly");
+    }
     function set(next, save) {
       on = next;
       button.setAttribute("aria-pressed", on ? "true" : "false");
-      button.setAttribute("title", on ? "Turn off snow" : "Turn on snow");
+      button.setAttribute("title", on ? "Turn off winter effects" : "Turn on winter effects");
       cancelAnimationFrame(raf);
       if (on) { readColor(); document.body.appendChild(canvas); resize(); raf = requestAnimationFrame(frame); }
-      else { canvas.remove(); flakes = []; }
+      else { canvas.remove(); flakes = []; sleigh.classList.remove("fly"); }
+      if (on && xmas) { root.setAttribute("data-xmas", "on"); garland(); } else root.removeAttribute("data-xmas");
       if (save) try { localStorage.setItem("snow", on ? "on" : "off"); } catch (e) {}
     }
 
     var saved = null;
     try { saved = localStorage.getItem("snow"); } catch (e) {}
     button.addEventListener("click", function () { set(!on, true); });
-    window.addEventListener("resize", function () { if (on) resize(); });
+    window.addEventListener("resize", function () { if (on) resize(); if (on && xmas) garland(); });
+    setTimeout(flyOnce, 5000);
+    setInterval(flyOnce, 45000);
     window.addEventListener("pointermove", function (e) { targetWind = (e.clientX / w - .5) * 1.2; });
     document.addEventListener("visibilitychange", function () {
       cancelAnimationFrame(raf);
       if (on && !document.hidden) raf = requestAnimationFrame(frame);
     });
     new MutationObserver(readColor).observe(root, { attributes: true, attributeFilter: ["data-active-theme", "data-theme"] });
-    set(saved ? saved === "on" : !window.matchMedia("(prefers-reduced-motion: reduce)").matches, false);
+    set(saved ? saved === "on" : !still, false);
   })();
 </script>
 <!-- visitor counter (GoatCounter, no cookies) -->
