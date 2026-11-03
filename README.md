@@ -4,7 +4,7 @@ M.S. student, School of Electrical Engineering, Kookmin University, Seoul, Repub
 
 Homepage: **[ohtaetu.github.io](https://ohtaetu.github.io/)**
 
-[Google Scholar](https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&hl=en) · [ORCID](https://orcid.org/0009-0000-0554-585X) · [Scopus](https://www.scopus.com/authid/detail.uri?authorId=60590914100) · [SciProfiles](https://sciprofiles.com/profile/ohtaetu) · [GitHub](https://github.com/ohtaetu)
+[ohtaetu@ieee.org](mailto:ohtaetu@ieee.org) · [Google Scholar](https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&hl=en) · [ORCID](https://orcid.org/0009-0000-0554-585X) · [Scopus](https://www.scopus.com/authid/detail.uri?authorId=60590914100) · [SciProfiles](https://sciprofiles.com/profile/ohtaetu) · [GitHub](https://github.com/ohtaetu)
 
 ## Research
 
