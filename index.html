@@ -151,6 +151,15 @@
       padding: 4px 11px; border-radius: 999px; font-size: .82rem; color: var(--text);
       background: var(--surface); border: 1px solid var(--line);
     }
+    .stats { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .stats div {
+      display: flex; flex-direction: column-reverse; padding: 12px 12px 10px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .stats dd { margin: 0; font: 700 1.65rem/1 "Space Grotesk", Inter, sans-serif; letter-spacing: -.02em; }
+    .stats div:first-child dd { color: var(--spike); }
+    .stats dt { margin-top: 7px; font: 500 .66rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+    .stats-note { margin: 10px 0 0; font-size: .76rem; line-height: 1.5; color: var(--faint); }
     .edu { margin: 0; padding: 0 0 0 18px; list-style: none; border-left: 1.5px solid var(--line); }
     .edu li { position: relative; padding-bottom: 16px; }
     .edu li:last-child { padding-bottom: 0; }
@@ -199,8 +208,21 @@
     }
     .pub:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); transform: translateY(-2px); box-shadow: var(--shadow), 0 0 0 4px var(--glow); }
     .pub:hover::before { height: calc(100% - 36px); }
+    .pub-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .cites {
+      flex: none; display: inline-flex; align-items: center; gap: 6px; margin: -3px -6px 0 0; padding: 3px 10px 3px 8px;
+      border-radius: 999px; border: 1px solid color-mix(in srgb, var(--spike) 40%, var(--line));
+      background: color-mix(in srgb, var(--spike) 7%, var(--surface)); color: var(--text);
+      font: 500 .72rem/1.4 "JetBrains Mono", ui-monospace, monospace; transition: border-color .2s ease;
+    }
+    .cites[hidden] { display: none; }
+    .cites:hover { border-color: var(--spike); text-decoration: none; }
+    .cites b { color: var(--spike); font-weight: 700; }
+    .cites svg { width: 11px; height: 11px; fill: var(--spike); }
+    .cites.bump { animation: bump 1.2s ease-out 2; }
+    @keyframes bump { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--spike) 45%, transparent); } to { box-shadow: 0 0 0 9px transparent; } }
     .venue-tag {
-      display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 2px;
       font: 500 .7rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--faint);
     }
     .venue-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--spike); }
@@ -234,6 +256,8 @@
       .photo-wrap { margin-bottom: 0; }
       .side-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
       .side-block { margin-top: 0; }
+      .side-block.metrics { grid-column: 1 / -1; }
+      .stats { max-width: 420px; }
       .spikes { margin: 26px 0 24px; }
     }
     @media (max-width: 640px) {
@@ -252,6 +276,7 @@
     @media (prefers-reduced-motion: reduce) {
       .spikes .pulse { animation: none; stroke-dashoffset: 120; }
       .pub, .links a, .theme-toggle .knob, body { transition: none; }
+      .cites.bump { animation: none; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -293,6 +318,15 @@
     </svg>
 
     <div class="side-blocks">
+      <div class="side-block metrics">
+        <h3 class="label">Citation metrics</h3>
+        <dl class="stats">
+          <div><dt>Citations</dt><dd data-stat="citations">1</dd></div>
+          <div><dt>h-index</dt><dd data-stat="h_index">1</dd></div>
+          <div><dt>Papers</dt><dd data-stat="papers">4</dd></div>
+        </dl>
+        <p class="stats-note">Highest count from <a href="https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&amp;hl=en">Google Scholar</a>, OpenAlex, Semantic Scholar and Crossref · updated <time data-stat="updated" datetime="2026-11-03">3 Nov 2026</time></p>
+      </div>
       <div class="side-block">
         <h3 class="label">Research interests</h3>
         <ul class="chips">
@@ -337,8 +371,11 @@
       <div class="year-group">
         <h3 class="year">2026</h3>
         <ol class="pubs">
-          <li class="pub">
-            <span class="venue-tag">Journal · IEEE TVLSI</span>
+          <li class="pub" data-doi="10.1109/tvlsi.2026.3741555">
+            <span class="pub-head">
+              <span class="venue-tag">Journal · IEEE TVLSI</span>
+              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+            </span>
             <span class="pub-title">QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes</span>
             <span class="pub-authors">S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, <strong>T. T. Ngo</strong>, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min</span>
             <span class="pub-venue"><em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>, early access, 2026.</span>
@@ -348,8 +385,11 @@
               <a href="citations/hong2026_qsatp_tvlsi.enw">EndNote</a>
             </span>
           </li>
-          <li class="pub">
-            <span class="venue-tag">Journal · IEEE Access</span>
+          <li class="pub" data-doi="10.1109/access.2026.3682854">
+            <span class="pub-head">
+              <span class="venue-tag">Journal · IEEE Access</span>
+              <a class="cites" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=3753050622014903727" title="Citations"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>1</b><span>citation</span></a>
+            </span>
             <span class="pub-title">Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment</span>
             <span class="pub-authors"><strong>T. T. Ngo</strong>*, N. Bich*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min</span>
             <span class="pub-venue"><em>IEEE Access</em>, vol. 14, pp. 56900–56918, 2026.</span>
@@ -360,8 +400,11 @@
               <a href="citations/ngo2026_resnet_access.enw">EndNote</a>
             </span>
           </li>
-          <li class="pub">
-            <span class="venue-tag">Journal · JTE</span>
+          <li class="pub" data-doi="10.54644/jte.2025.1756">
+            <span class="pub-head">
+              <span class="venue-tag">Journal · JTE</span>
+              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+            </span>
             <span class="pub-title">Optimizing binary neural network for resource-constrained edge devices in IoT applications</span>
             <span class="pub-authors">V. M. Nguyen, <strong>T. T. Ngo</strong>, T. D. Tran, M. T. Nguyen, and M. H. Vo</span>
             <span class="pub-venue"><em>Journal of Technical Education Science</em>, vol. 21, no. 1, pp. 12–22, Feb. 2026.</span>
@@ -380,8 +423,11 @@
       <div class="year-group">
         <h3 class="year">2025</h3>
         <ol class="pubs">
-          <li class="pub">
-            <span class="venue-tag">Journal · IJECE</span>
+          <li class="pub" data-doi="10.11591/ijece.v15i6.pp5173-5182">
+            <span class="pub-head">
+              <span class="venue-tag">Journal · IJECE</span>
+              <a class="cites" title="Citations" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h5l2-5V5H3v8h3l-2 5zm10 0h5l2-5V5h-8v8h3l-2 5z"/></svg><b>0</b><span>citations</span></a>
+            </span>
             <span class="pub-title">Improving time-domain winner-take-all circuit for neuromorphic computing systems</span>
             <span class="pub-authors">S. N. Truong and <strong>T. T. Ngo</strong></span>
             <span class="pub-venue"><em>International Journal of Electrical and Computer Engineering (IJECE)</em>, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.</span>
@@ -427,6 +473,67 @@
     });
     if (media.addEventListener) media.addEventListener("change", sync);
     sync();
+  })();
+
+  // citation counts: data/citations.json is refreshed daily by a GitHub Action;
+  // OpenAlex is also asked live, and the higher number wins
+  (function () {
+    var cards = {};
+    document.querySelectorAll(".pub[data-doi]").forEach(function (li) {
+      var badge = li.querySelector(".cites");
+      var n = +badge.querySelector("b").textContent;
+      cards[li.getAttribute("data-doi")] = { badge: badge, shown: n, count: n, url: badge.getAttribute("href") };
+    });
+    function stat(name, value) {
+      var el = document.querySelector('[data-stat="' + name + '"]');
+      if (el) el.textContent = value;
+    }
+    function merge(doi, count, url) {
+      var c = cards[doi];
+      if (!c || !(count >= 0)) return;
+      if (count > c.count) c.count = count;
+      if (url && !c.url) { c.url = url; c.badge.href = url; }
+    }
+    function render() {
+      var counts = [];
+      Object.keys(cards).forEach(function (doi) {
+        var c = cards[doi], b = c.badge;
+        counts.push(c.count);
+        b.querySelector("b").textContent = c.count;
+        b.querySelector("span").textContent = c.count === 1 ? "citation" : "citations";
+        b.hidden = c.count < 1;
+        if (c.count > c.shown) { b.classList.add("bump"); c.shown = c.count; }
+      });
+      counts.sort(function (a, b) { return b - a; });
+      stat("citations", counts.reduce(function (a, b) { return a + b; }, 0));
+      stat("h_index", counts.filter(function (c, i) { return c >= i + 1; }).length);
+      stat("papers", counts.length);
+    }
+    function json(url, opts) {
+      return fetch(url, opts).then(function (r) { return r.json(); }).catch(function () { return null; });
+    }
+    Promise.all([
+      json("data/citations.json", { cache: "no-cache" }),
+      json("https://api.openalex.org/works?per-page=50&select=doi,id,cited_by_count&filter=doi:" + Object.keys(cards).join("|"))
+    ]).then(function (res) {
+      var local = res[0], live = res[1];
+      if (local && local.papers) {           // first, so Scholar "cited by" links win
+        Object.keys(local.papers).forEach(function (doi) {
+          var p = local.papers[doi];
+          merge(doi, p.count, p.scholar_url || (p.openalex_id && "https://openalex.org/works?filter=cites:" + p.openalex_id));
+        });
+        var t = document.querySelector('[data-stat="updated"]'), d = new Date(local.updated + "T00:00:00");
+        if (t && !isNaN(d)) {
+          t.setAttribute("datetime", local.updated);
+          t.textContent = d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+        }
+      }
+      ((live && live.results) || []).forEach(function (w) {
+        merge(w.doi.replace("https://doi.org/", "").toLowerCase(), w.cited_by_count,
+              "https://openalex.org/works?filter=cites:" + w.id.split("/").pop());
+      });
+      render();
+    });
   })();
 </script>
 </body>

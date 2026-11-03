@@ -1,0 +1,28 @@
+name: Update citation counts
+
+on:
+  schedule:
+    - cron: "23 2 * * *"   # every day, 02:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch citation counts
+        run: python3 scripts/update_citations.py
+      - name: Commit if a count changed
+        run: |
+          git config user.name "ohtaetu"
+          git config user.email "257238248+ohtaetu@users.noreply.github.com"
+          git add data/citations.json
+          if git diff --cached --quiet; then
+            echo "No change"
+          else
+            git commit -m "Update citation counts"
+            git push
+          fi
