@@ -21,8 +21,8 @@
     SOFTWARE
 
 bell.svg, christmas_tree.svg, snowman.svg and wrapped_gift.svg are from Microsoft Fluent Emoji
-(https://github.com/microsoft/fluentui-emoji), used under the MIT License above. santa_hat.svg is
-made from the hat paths of the Santa Claus emoji.
+(https://github.com/microsoft/fluentui-emoji), used under the MIT License above.
 
-sleigh.svg is "Santa with flying deers" from Openclipart (https://openclipart.org/detail/173455),
-released into the public domain; it was only cropped.
+From Openclipart, released into the public domain and only cropped:
+- sleigh.svg: "Santa with flying deers" (https://openclipart.org/detail/173455)
+- santa_hat.svg: "Christmas Hat" (https://openclipart.org/detail/166276)
