@@ -18,7 +18,7 @@ Compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learni
 ## Publications
 
 1. **QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes**  
-   S. Hong, H. Kim, H. Jo, H. Choi, N. Jung, Y. Kim, J. Lee, **T. T. Ngo**, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min  
+   S. Hong*, H. Kim*, H. Jo*, H. Choi, N. Jung, Y. Kim, J. Lee, **T. T. Ngo**, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min (*equal contribution)  
    *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, early access, 2026.  
    [DOI: 10.1109/TVLSI.2026.3741555](https://doi.org/10.1109/TVLSI.2026.3741555) · [BibTeX](https://ohtaetu.github.io/citations/hong2026_qsatp_tvlsi.bib) · [EndNote](https://ohtaetu.github.io/citations/hong2026_qsatp_tvlsi.enw)
 
