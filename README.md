@@ -17,22 +17,27 @@ Compute-in-memory, neuromorphic circuits, equilibrium propagation, analog learni
 
 ## Publications
 
-1. **QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes**  
+1. **SERN: Signed equilibrium-propagation resistive networks for overcoming non-negative conductance constraints**  
+   S. Oh\*, D. Yun\*, **T. T. Ngo**\*, S. Hong, H. Kim, H. Jo, J. Lee, N. Jung, Y. Kim, H. Choi, and K.-S. Min (\*equal contribution)  
+   *IEEE Transactions on Circuits and Systems I: Regular Papers*, early access, 2026.  
+   [DOI: 10.1109/TCSI.2026.3742487](https://doi.org/10.1109/TCSI.2026.3742487) · [BibTeX](https://ohtaetu.github.io/citations/oh2026_sern_tcasi.bib) · [EndNote](https://ohtaetu.github.io/citations/oh2026_sern_tcasi.enw)
+
+2. **QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization for IR-drop mitigation in SRAM CIM across technology nodes**  
    S. Hong\*, H. Kim\*, H. Jo\*, H. Choi, N. Jung, Y. Kim, J. Lee, **T. T. Ngo**, D. Yun, W.-S. Ko, G.-W. Lee, and K.-S. Min (\*equal contribution)  
    *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, early access, 2026.  
    [DOI: 10.1109/TVLSI.2026.3741555](https://doi.org/10.1109/TVLSI.2026.3741555) · [BibTeX](https://ohtaetu.github.io/citations/hong2026_qsatp_tvlsi.bib) · [EndNote](https://ohtaetu.github.io/citations/hong2026_qsatp_tvlsi.enw)
 
-2. **Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment**  
+3. **Progressive compression of ResNet: An 8.33× reduction with 90.5% accuracy retention for edge deployment**  
    **T. T. Ngo**\*, N. Bich\*, P. T. Bao, S. N. Truong, H. M. Vo, K. V. Pham, and K.-S. Min (\*equal contribution)  
    *IEEE Access*, vol. 14, pp. 56900–56918, 2026.  
    [DOI: 10.1109/ACCESS.2026.3682854](https://doi.org/10.1109/ACCESS.2026.3682854) · [Project page](https://github.com/ohtaetu/resnet-edge-compression) · [BibTeX](https://ohtaetu.github.io/citations/ngo2026_resnet_access.bib) · [EndNote](https://ohtaetu.github.io/citations/ngo2026_resnet_access.enw)
 
-3. **Optimizing binary neural network for resource-constrained edge devices in IoT applications**  
+4. **Optimizing binary neural network for resource-constrained edge devices in IoT applications**  
    V. M. Nguyen, **T. T. Ngo**, T. D. Tran, M. T. Nguyen, and M. H. Vo  
    *Journal of Technical Education Science (JTE)*, vol. 21, no. 1, pp. 12–22, Feb. 2026.  
    [DOI: 10.54644/jte.2025.1756](https://doi.org/10.54644/jte.2025.1756) · [Project page](https://github.com/ohtaetu/2026-bnn-new) · [PDF](https://ohtaetu.github.io/papers/nguyen2026_bnn_jte.pdf) · [BibTeX](https://ohtaetu.github.io/citations/nguyen2026_bnn_jte.bib) · [EndNote](https://ohtaetu.github.io/citations/nguyen2026_bnn_jte.enw)
 
-4. **Improving time-domain winner-take-all circuit for neuromorphic computing systems**  
+5. **Improving time-domain winner-take-all circuit for neuromorphic computing systems**  
    S. N. Truong and **T. T. Ngo**  
    *International Journal of Electrical and Computer Engineering (IJECE)*, vol. 15, no. 6, pp. 5173–5182, Dec. 2025.  
    [DOI: 10.11591/ijece.v15i6.pp5173-5182](https://doi.org/10.11591/ijece.v15i6.pp5173-5182) · [Project page](https://ohtaetu.github.io/2025-wta/) · [PDF](https://ohtaetu.github.io/2025-wta/truong2025_wta_ijece.pdf) · [BibTeX](https://ohtaetu.github.io/2025-wta/citation.bib) · [EndNote](https://ohtaetu.github.io/2025-wta/citation.enw)

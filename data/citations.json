@@ -1,22 +1,29 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-05",
   "totals": {
     "citations": 1,
     "h_index": 1,
-    "papers": 4
+    "papers": 5
   },
   "papers": {
+    "10.1109/tcsi.2026.3742487": {
+      "sources": {
+        "crossref": 0
+      },
+      "count": 0
+    },
     "10.1109/tvlsi.2026.3741555": {
       "sources": {
         "openalex": 0,
-        "crossref": 0
+        "crossref": 0,
+        "scholar": 0
       },
       "count": 0
     },
     "10.1109/access.2026.3682854": {
       "sources": {
         "scholar": 1,
-        "openalex": 0,
+        "openalex": 1,
         "crossref": 0
       },
       "count": 1
