@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "totals": {
     "citations": 1,
     "h_index": 1,
@@ -8,7 +8,8 @@
   "papers": {
     "10.1109/tcsi.2026.3742487": {
       "sources": {
-        "crossref": 0
+        "crossref": 0,
+        "openalex": 0
       },
       "count": 0
     },
