@@ -20,6 +20,7 @@ SCHOLAR = "https://scholar.google.com/citations?user=Uu5cUOUAAAAJ&hl=en"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 PAPERS = [
+    ("10.1109/access.2026.3752491", "SoDAR-Net: Gate-input 1T1R RRAM crossbars with driverless rows and device-intrinsic ReLU"),
     ("10.1109/tcsi.2026.3742487", "SERN: Signed equilibrium-propagation resistive networks for overcoming non-negative conductance constraints"),
     ("10.1109/tvlsi.2026.3741555", "QS-ATP: Quasi-static active-transistor PDN modeling and partition optimization"),
     ("10.1109/access.2026.3682854", "Progressive compression of ResNet: An 8.33x reduction with 90.5% accuracy retention"),
