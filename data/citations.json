@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-21",
   "totals": {
     "citations": 1,
     "h_index": 1,
@@ -10,7 +10,8 @@
       "sources": {
         "openalex": 0,
         "semanticscholar": 0,
-        "crossref": 0
+        "crossref": 0,
+        "scholar": 0
       },
       "count": 0
     },
@@ -18,7 +19,8 @@
       "sources": {
         "crossref": 0,
         "openalex": 0,
-        "semanticscholar": 0
+        "semanticscholar": 0,
+        "scholar": 0
       },
       "count": 0
     },
